@@ -43,6 +43,7 @@
 // Servos
 //
 #define SERVO0_PIN                          PB11  // BLTOUCH
+//#define SERVO1_PIN                          PH13  // custom Servo für Toolchanger
 #define SOL0_PIN                            PC7   // Toolchanger
 
 #if ENABLED(TOOL_SENSOR)
@@ -322,9 +323,9 @@
 //
 // Heaters / Fans
 //
-#define HEATER_0_PIN                        PB1   // Heater0
+#define HEATER_0_PIN                        PB0   // Heater0  default: PB1
 #define HEATER_1_PIN                        PA1   // Heater1
-#define HEATER_2_PIN                        PB0   // Heater2
+#define HEATER_2_PIN                        PB1   // Heater2  default: PB0
 
 #if ENABLED(M5_EXTENDER)
   #define HEATER_3_PIN                      PD15  // M5 HEAT1
@@ -336,9 +337,9 @@
 
 #define HEATER_BED_PIN                      PA2   // Hotbed
 
-#define FAN0_PIN                            PE5   // Fan0
+#define FAN0_PIN                             PC8   //PE5   // Fan0
 #define FAN1_PIN                            PE6   // Fan1
-#define FAN2_PIN                            PC8   // Fan2
+#define FAN2_PIN                            PE5   //PC8   // Fan2 getauscht, da PE5 dauerhaft an bleibt und nicht mehr steuerbar ist
 
 #if ENABLED(M5_EXTENDER)
   #define FAN3_PIN                          PI5   // M5 FAN1

@@ -882,10 +882,10 @@
 
 // Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,
 // either in the usual order or reversed
-//#define COREXY
+#define COREXY
 //#define COREXZ
 //#define COREYZ
-#define COREYX
+//#define COREYX
 //#define COREZX
 //#define COREZY
 //#define MARKFORGED_XY  // MarkForged. See https://reprap.org/forum/read.php?152,504042
@@ -1540,7 +1540,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, 32.50, -2.50 }
+#define NOZZLE_TO_PROBE_OFFSET { 0, 32.50, 0 }
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 //#define PROBING_TOOL 0
@@ -1772,15 +1772,15 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 300
+#define X_BED_SIZE 340
 #define Y_BED_SIZE 300
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS -47.8 //-62.8mm
+#define X_MIN_POS -15
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
-#define Y_MAX_POS 320.25 //Y_BED_SIZE
+#define Y_MAX_POS 365 //Y_BED_SIZE
 #define Z_MAX_POS 340
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50

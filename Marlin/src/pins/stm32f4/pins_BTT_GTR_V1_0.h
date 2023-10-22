@@ -53,9 +53,11 @@
 #define SOL0_PIN                            PC7   // Toolchanger
 
 #if ENABLED(TOOL_SENSOR)
-  #define TOOL_SENSOR1_PIN                  PH6
-  #define TOOL_SENSOR2_PIN                  PI4
-  //#define TOOL_SENSOR3_PIN                PF4
+  #define TOOL_SENSOR1_PIN                  PI4
+  #define TOOL_SENSOR2_PIN                  PF4
+  #define TOOL_SENSOR3_PIN                  PF6   //*FG
+  #define TOOL_SENSOR4_PIN                  PI7   //*FG
+  #define TOOL_SENSOR5_PIN                  PF12  //*FG
 #else
   #define PS_ON_PIN                         PH6
 #endif
@@ -112,7 +114,7 @@
 //
 // Pins on the extender
 //
-#if ENABLED(M5_EXTENDER)
+/* #if ENABLED(M5_EXTENDER)
   #ifndef X2_STOP_PIN
     #define X2_STOP_PIN                     PI4   // M5 M1_STOP
   #endif
@@ -128,7 +130,7 @@
   #ifndef Z4_STOP_PIN
     #define Z4_STOP_PIN                     PF6   // M5 M3_STOP
   #endif
-#endif
+#endif */
 
 #ifndef Z_MIN_PROBE_PIN
   #define Z_MIN_PROBE_PIN                   PH11  // Z Probe must be PH11

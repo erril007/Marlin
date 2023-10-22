@@ -114,7 +114,8 @@
 //
 // Pins on the extender
 //
-/* #if ENABLED(M5_EXTENDER)
+/* FG
+#if ENABLED(M5_EXTENDER)
   #ifndef X2_STOP_PIN
     #define X2_STOP_PIN                     PI4   // M5 M1_STOP
   #endif
@@ -130,7 +131,8 @@
   #ifndef Z4_STOP_PIN
     #define Z4_STOP_PIN                     PF6   // M5 M3_STOP
   #endif
-#endif */
+#endif
+*/
 
 #ifndef Z_MIN_PROBE_PIN
   #define Z_MIN_PROBE_PIN                   PH11  // Z Probe must be PH11

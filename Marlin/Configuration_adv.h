@@ -2426,7 +2426,7 @@
  * For more details see https://marlinfw.org/docs/features/probe_temp_compensation.html
  */
 //#define PTC_PROBE    // Compensate based on probe temperature
-//#define PTC_BED      // Compensate based on bed temperature
+#define PTC_BED      // Compensate based on bed temperature
 //#define PTC_HOTEND   // Compensate based on hotend temperature
 
 #if ANY(PTC_PROBE, PTC_BED, PTC_HOTEND)
@@ -2435,7 +2435,7 @@
    * point and the point with index PTC_LINEAR_EXTRAPOLATION. e.g., If set to 4 it will use the
    * linear extrapolation between data[0] and data[4] for values below PTC_PROBE_START.
    */
-  //#define PTC_LINEAR_EXTRAPOLATION 4
+  #define PTC_LINEAR_EXTRAPOLATION 4
 
   #if ENABLED(PTC_PROBE)
     // Probe temperature calibration generates a table of values starting at PTC_PROBE_START
@@ -2448,7 +2448,7 @@
 
   #if ENABLED(PTC_BED)
     // Bed temperature calibration builds a similar table.
-    #define PTC_BED_START     60    // (°C)
+    #define PTC_BED_START     30    // (°C)
     #define PTC_BED_RES        5    // (°C)
     #define PTC_BED_COUNT     10
     #define PTC_BED_ZOFFS     { 0 } // (µm) Z adjustments per sample

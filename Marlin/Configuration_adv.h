@@ -3856,7 +3856,7 @@
  */
 #define AUTO_REPORT_POSITION
 #if ENABLED(AUTO_REPORT_POSITION)
-  //#define AUTO_REPORT_REAL_POSITION // Auto-report the real position
+  #define AUTO_REPORT_REAL_POSITION // Auto-report the real position
 #endif
 
 /**

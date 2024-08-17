@@ -44,7 +44,7 @@
 //
 //#define SPINDLE_LASER_ENA_PIN
 #define SPINDLE_LASER_PWM_PIN               PF13  //Laser PWM Pin
-//#define AIR_ASSIST_PIN
+#define AIR_ASSIST_PIN                      PI10
 
 //
 // Servos

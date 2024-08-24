@@ -3188,7 +3188,7 @@
    * point where a collision makes the motor skip instead of damaging the bed,
    * though this is unlikely to save delicate probes from being damaged.
    */
-  //#define PROBING_USE_CURRENT_HOME
+  #define PROBING_USE_CURRENT_HOME
 
   // @section tmc/spi
 

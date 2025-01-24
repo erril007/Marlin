@@ -335,16 +335,16 @@
 
 #define HEATER_BED_PIN                      PA2   // Hotbed
 
-#define FAN0_PIN                             PC8  //PE5   // Fan0 *FG
+#define FAN0_PIN                            PC8  //PE5   // Fan0 *FG
 #define FAN1_PIN                            PE6   // Fan1
 #define FAN2_PIN                            PE5   //PC8   // Fan2 getauscht, da PE5 dauerhaft an bleibt und nicht mehr steuerbar ist  *FG
 
 #if ENABLED(M5_EXTENDER)
   #define FAN3_PIN                          PI5   // M5 FAN1
-  #define FAN4_PIN                          PE9   // M5 FAN2
-  #define FAN5_PIN                          PE11  // M5 FAN3
-  #define FAN6_PIN                          PC9   // M5 FAN4  *FG
-  #define FAN7_PIN                          PE14  // M5 FAN5  *FG
+  #define FAN4_PIN                          PE9   // M5 FAN2  *FG multiplex FAN1
+  #define FAN5_PIN                          PE11  // M5 FAN3  *FG multiplex FAN0
+  #define FAN6_PIN                          PC9   // M5 FAN4  *FG Autofan E1
+  #define FAN7_PIN                          PE14  // M5 FAN5  *FG Autofan E0
 #endif
 
 #ifndef SDCARD_CONNECTION

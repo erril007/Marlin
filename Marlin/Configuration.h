@@ -334,7 +334,7 @@
   #define SWITCHING_TOOLHEAD_Y_POS          365         // (mm) Y position of the toolhead dock
   #define SWITCHING_TOOLHEAD_Y_SECURITY      10         // (mm) Security distance Y axis
   #define SWITCHING_TOOLHEAD_Y_CLEAR         65         // (mm) Minimum distance from dock for unobstructed X axis
-  #define SWITCHING_TOOLHEAD_X_POS          { 35, 110, 185 }  // (mm) X positions for parking the extruders  { 35, 110, 185, 260, 335 }
+  #define SWITCHING_TOOLHEAD_X_POS          { 335, 260, 185 }  // (mm) X positions for parking the extruders  { 35, 110, 185, 260, 335 }
   #if ENABLED(SWITCHING_TOOLHEAD)
     #define SWITCHING_TOOLHEAD_SERVO_NR       0         // Index of the servo connector
     #define SWITCHING_TOOLHEAD_SERVO_ANGLES { 0, 60 }  // (degrees) Angles for Lock, Unlock

@@ -43,14 +43,14 @@
 // Custom Pins //FG
 //
 //#define SPINDLE_LASER_ENA_PIN
-#define SPINDLE_LASER_PWM_PIN               PF13  //Laser PWM Pin
+#define SPINDLE_LASER_PWM_PIN               PI8  //Laser PWM Pin
 #define AIR_ASSIST_PIN                      PI10
 
 //
 // Servos
 //
-#define SERVO0_PIN                          PB11  // BLTOUCH
-//#define SERVO1_PIN                          PH13  // custom Servo für Toolchanger
+//#define SERVO0_PIN                          PB11  // BLTOUCH
+#define SERVO0_PIN                          PF13  // custom Servo für Toolchanger
 #define SOL0_PIN                            PC7   // Toolchanger
 
 #if ENABLED(TOOL_SENSOR)

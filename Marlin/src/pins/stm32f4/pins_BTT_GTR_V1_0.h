@@ -50,8 +50,8 @@
 // Servos
 //
 //#define SERVO0_PIN                          PB11  // BLTOUCH
-#define SERVO0_PIN                          PF13  // custom Servo für Toolchanger
-#define SOL0_PIN                            PC7   // Toolchanger
+#define SERVO0_PIN                          PF13  //FG custom Servo für Toolchanger
+//#define SOL0_PIN                            PC7   // Toolchanger
 
 #if ENABLED(TOOL_SENSOR)
   #define TOOL_SENSOR1_PIN                  PI4

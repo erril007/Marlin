@@ -61,7 +61,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "Icke" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "FG" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -171,11 +171,11 @@
 #define E2_DRIVER_TYPE TMC2209
 //#define E3_DRIVER_TYPE TMC2209
 //#define E4_DRIVER_TYPE TMC2209
-//#define E5_DRIVER_TYPE A4988
+//#define E5_DRIVER_TYPE TMC2209
 //#define E6_DRIVER_TYPE A4988
 //#define E7_DRIVER_TYPE A4988
 
-#define NO_AUTO_ASSIGN_WARNING
+//#define NO_AUTO_ASSIGN_WARNING
 
 /**
  * Additional Axis Settings

@@ -1642,11 +1642,11 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-//#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 20 }   //FG offset for carrier probe
-#define NOZZLE_TO_PROBE_OFFSET { 0, 0, 15 }   //FG offset probe tool
+#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 20 }   //FG offset for carrier probe
+//#define NOZZLE_TO_PROBE_OFFSET { 0, 0, 20 }   //FG offset probe tool
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
-#define PROBING_TOOL 2
+//#define PROBING_TOOL 2
 #ifdef PROBING_TOOL
   //#define PROBE_TOOLCHANGE_NO_MOVE  // Suppress motion on probe tool-change
 #endif
@@ -1815,9 +1815,9 @@
 // @section motion
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
-#define INVERT_Y_DIR false
-#define INVERT_Z_DIR true
+#define INVERT_X_DIR true
+#define INVERT_Y_DIR true
+#define INVERT_Z_DIR false
 //#define INVERT_I_DIR false
 //#define INVERT_J_DIR false
 //#define INVERT_K_DIR false
@@ -2354,7 +2354,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (1200), (1200), (4*60) }
+#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (4*60) }
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 #define EDITABLE_HOMING_FEEDRATE

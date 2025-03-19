@@ -2827,7 +2827,7 @@
    * Tool Sensors detect when tools have been picked up or dropped.
    * Requires the pins TOOL_SENSOR1_PIN, TOOL_SENSOR2_PIN, etc.
    */
-  #define TOOL_SENSOR
+  //#define TOOL_SENSOR
 
   /**
    * Retract and prime filament on tool-change to reduce
@@ -3464,7 +3464,7 @@
     //#define V_STALL_SENSITIVITY  8
     //#define W_STALL_SENSITIVITY  8
     //#define SPI_ENDSTOPS              // TMC2130/TMC5160 only
-    #define IMPROVE_HOMING_RELIABILITY
+    //#define IMPROVE_HOMING_RELIABILITY
   #endif
 
   // @section tmc/config

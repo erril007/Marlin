@@ -1036,7 +1036,7 @@
    * If not defined, probe limits will be used.
    * Override with 'M422 S<index> X<pos> Y<pos>'.
    */
-  #define Z_STEPPER_ALIGN_XY { {  20, 20 }, { 280, 20 }, { 150, 280 } }
+  #define Z_STEPPER_ALIGN_XY { {  50, 50 }, { 280, 50 }, { 150, 250 } }
 
   /**
    * Orientation for the automatically-calculated probe positions.
@@ -1069,7 +1069,7 @@
    * positions in the bed carriage, with one position per Z stepper in stepper
    * driver order.
    */
-  #define Z_STEPPER_ALIGN_STEPPER_XY { { -10.0, -10.0 }, { 310.0, -10.0 }, { 150.0, 310.0 } }
+  #define Z_STEPPER_ALIGN_STEPPER_XY { { -55.0, -74.0 }, { 385.0, -74.0 }, { 150.0, 374.0 } }  //Koordinaten der Achsen
 
   #ifndef Z_STEPPER_ALIGN_STEPPER_XY
     // Amplification factor. Used to scale the correction step up or down in case
@@ -3449,9 +3449,9 @@
 
   #if ANY(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
-    #define X_STALL_SENSITIVITY  255
+    #define X_STALL_SENSITIVITY  80
     #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-    #define Y_STALL_SENSITIVITY  255
+    #define Y_STALL_SENSITIVITY  100
     #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
     //#define Z_STALL_SENSITIVITY  200
     //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY

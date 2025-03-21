@@ -1036,7 +1036,7 @@
    * If not defined, probe limits will be used.
    * Override with 'M422 S<index> X<pos> Y<pos>'.
    */
-  #define Z_STEPPER_ALIGN_XY { {  60, 60 }, { 270, 60 }, { 150, 240 } }
+  //#define Z_STEPPER_ALIGN_XY { {  60, 60 }, { 270, 60 }, { 165, 240 } }
 
   /**
    * Orientation for the automatically-calculated probe positions.
@@ -1069,7 +1069,8 @@
    * positions in the bed carriage, with one position per Z stepper in stepper
    * driver order.
    */
-  #define Z_STEPPER_ALIGN_STEPPER_XY { { -55.0, -74.0 }, { 385.0, -74.0 }, { 150.0, 374.0 } }  //Koordinaten der Achsen
+  //#define Z_STEPPER_ALIGN_STEPPER_XY { { -55.0, -74.0 }, { 385.0, -74.0 }, { 165.0, 374.0 } }  //Koordinaten der Achsen
+  #define Z_STEPPER_ALIGN_STEPPER_XY { { 5.0, -10.0 }, { 325.0, -10.0 }, { 165.0, 310.0 } }  //Koordinaten der Kugelgelenke
 
   #ifndef Z_STEPPER_ALIGN_STEPPER_XY
     // Amplification factor. Used to scale the correction step up or down in case
@@ -1928,7 +1929,7 @@
    * Use 'M503 C' to write the settings out to the SD Card as 'mc.zip'.
    * See docs/ConfigEmbedding.md for details on how to use 'mc-apply.py'.
    */
-  #define CONFIGURATION_EMBEDDING
+  //#define CONFIGURATION_EMBEDDING
 
   // Add an optimized binary file transfer mode, initiated with 'M28 B1'
   #define BINARY_FILE_TRANSFER
@@ -3002,7 +3003,7 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       900        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT       850        // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  //FG  // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.11
@@ -3022,7 +3023,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       900
+    #define Y_CURRENT       850
     #define Y_CURRENT_HOME  Y_CURRENT  //FG
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
@@ -3042,7 +3043,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       900
+    #define Z_CURRENT       850
     #define Z_CURRENT_HOME  Z_CURRENT  //FG
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11

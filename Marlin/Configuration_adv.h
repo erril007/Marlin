@@ -1036,7 +1036,7 @@
    * If not defined, probe limits will be used.
    * Override with 'M422 S<index> X<pos> Y<pos>'.
    */
-  #define Z_STEPPER_ALIGN_XY { {  55, 40 }, { 275, 40 }, { 165, 260 } }
+  #define Z_STEPPER_ALIGN_XY { {  40, 40 }, { 260, 40 }, { 150, 260 } }
 
   /**
    * Orientation for the automatically-calculated probe positions.
@@ -2344,7 +2344,7 @@
 #define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   #if ENABLED(DISTINCT_E_FACTORS)
-    #define ADVANCE_K { 0, 0, 0 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
+    #define ADVANCE_K { 0, 0 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
   #else
     #define ADVANCE_K 0        // (mm) Compression length applying to all extruders
   #endif

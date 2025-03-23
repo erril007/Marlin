@@ -341,8 +341,8 @@
 
 #if ENABLED(M5_EXTENDER)
   #define FAN3_PIN                          PI5   // M5 FAN1
-  #define FAN4_PIN                          PE9   // M5 FAN2  *FG multiplex FAN1
-  #define FAN5_PIN                          PE11  // M5 FAN3  *FG multiplex FAN0
+  #define FAN4_PIN                          PE9   // M5 FAN2  *FG parallel to FAN1
+  #define FAN5_PIN                          PE11  // M5 FAN3  *FG parallel to FAN0
   #define FAN6_PIN                          PC9   // M5 FAN4  *FG Autofan E1
   #define FAN7_PIN                          PE14  // M5 FAN5  *FG Autofan E0
 #endif

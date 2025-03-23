@@ -335,7 +335,7 @@
   #define SWITCHING_TOOLHEAD_Y_POS          365         // (mm) Y position of the toolhead dock
   #define SWITCHING_TOOLHEAD_Y_SECURITY      10         // (mm) Security distance Y axis
   #define SWITCHING_TOOLHEAD_Y_CLEAR         65         // (mm) Minimum distance from dock for unobstructed X axis
-  #define SWITCHING_TOOLHEAD_X_POS          { 335, 260 }  // (mm) X positions for parking the extruders  { 35, 110, 185, 260, 335 }
+  #define SWITCHING_TOOLHEAD_X_POS          { 315, 240 }  // (mm) X positions for parking the extruders  { 15, 90, 165, 240, 315 }
   #if ENABLED(SWITCHING_TOOLHEAD)
     #define SWITCHING_TOOLHEAD_SERVO_NR       0         // Index of the servo connector
     #define SWITCHING_TOOLHEAD_SERVO_ANGLES { 0, 60 }  // (degrees) Angles for Lock, Unlock
@@ -1902,10 +1902,10 @@
 
 // The size of the printable area
 #define X_BED_SIZE 300
-#define Y_BED_SIZE 300
+#define Y_BED_SIZE 330
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS -35
+#define X_MIN_POS -20
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
 #define X_MAX_POS 335   //X_BED_SIZE  //FG

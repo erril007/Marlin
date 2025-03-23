@@ -2161,7 +2161,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of flash!
  */
-#define DEBUG_LEVELING_FEATURE
+//#define DEBUG_LEVELING_FEATURE
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL, PROBE_MANUALLY)
   // Set a height for the start of manual adjustment
@@ -2561,7 +2561,7 @@
  *
  *   Caveats: The ending Z should be the same as starting Z.
  */
-//#define NOZZLE_CLEAN_FEATURE
+#define NOZZLE_CLEAN_FEATURE
 
 #if ENABLED(NOZZLE_CLEAN_FEATURE)
   #define NOZZLE_CLEAN_PATTERN_LINE     // Provide 'G12 P0' - a simple linear cleaning pattern
@@ -2579,8 +2579,8 @@
 
   // Specify positions for each tool as { { X, Y, Z }, { X, Y, Z } }
   // Dual hotend system may use { {  -20, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) },  {  420, (Y_BED_SIZE / 2), (Z_MIN_POS + 1) }}
-  #define NOZZLE_CLEAN_START_POINT { { 335, 360, (Z_MIN_POS + 1) }, { 260, 360, (Z_MIN_POS + 1) }, { 185, 360, (Z_MIN_POS + 1) } }
-  #define NOZZLE_CLEAN_END_POINT   { { 335, 340, (Z_MIN_POS + 1) }, { 260, 340, (Z_MIN_POS + 1) }, { 185, 340, (Z_MIN_POS + 1) } }
+  #define NOZZLE_CLEAN_START_POINT { { 335, 360, (Z_MIN_POS + 1) }, { 260, 360, (Z_MIN_POS + 1) } } //, { 185, 360, (Z_MIN_POS + 1) }
+  #define NOZZLE_CLEAN_END_POINT   { { 335, 340, (Z_MIN_POS + 1) }, { 260, 340, (Z_MIN_POS + 1) } } //, { 185, 340, (Z_MIN_POS + 1) }
 
   #if ENABLED(NOZZLE_CLEAN_PATTERN_CIRCLE)
     #define NOZZLE_CLEAN_CIRCLE_RADIUS 6.5                      // (mm) Circular pattern radius

@@ -56,7 +56,7 @@
 #if ENABLED(TOOL_SENSOR)
   #define TOOL_SENSOR1_PIN                  PI4
   #define TOOL_SENSOR2_PIN                  PF4
-  #define TOOL_SENSOR3_PIN                  PF6   //FG
+  //#define TOOL_SENSOR3_PIN                  PF6   //FG
   //#define TOOL_SENSOR4_PIN                  PI7   //FG
   //#define TOOL_SENSOR5_PIN                  PF12  //FG
 #else

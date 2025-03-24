@@ -333,7 +333,7 @@
 
 #if ANY(SWITCHING_TOOLHEAD, MAGNETIC_SWITCHING_TOOLHEAD, ELECTROMAGNETIC_SWITCHING_TOOLHEAD)
   #define SWITCHING_TOOLHEAD_Y_POS          365         // (mm) Y position of the toolhead dock
-  #define SWITCHING_TOOLHEAD_Y_SECURITY      10         // (mm) Security distance Y axis
+  #define SWITCHING_TOOLHEAD_Y_SECURITY       0         // (mm) Security distance Y axis
   #define SWITCHING_TOOLHEAD_Y_CLEAR         65         // (mm) Minimum distance from dock for unobstructed X axis
   #define SWITCHING_TOOLHEAD_X_POS          { 315, 240 }  // (mm) X positions for parking the extruders  { 15, 90, 165, 240, 315 }
   #if ENABLED(SWITCHING_TOOLHEAD)

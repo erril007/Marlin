@@ -689,9 +689,9 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN -1
-#define E1_AUTO_FAN_PIN FAN7_PIN
-#define E2_AUTO_FAN_PIN FAN6_PIN
+#define E0_AUTO_FAN_PIN FAN6_PIN
+#define E1_AUTO_FAN_PIN FAN5_PIN
+#define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
 #define E4_AUTO_FAN_PIN -1
 #define E5_AUTO_FAN_PIN -1
@@ -1087,17 +1087,17 @@
   // Re-homing might be more precise in reproducing the actual 'G28 Z' homing height, especially on an uneven bed.
   #define HOME_AFTER_G34
 
-  /**
+/**
  * Commands to execute at the start of G34 probing,
  * after switching to the PROBING_TOOL.
  */
-//#define EVENT_GCODE_BEFORE_G34 "M300 P440 S200"
+#define EVENT_GCODE_BEFORE_G34 "T0\nG60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nG4\nM280 P0 S60\nG4\nG0 Y300 F6000\nG61 S0"
 
 /**
  * Commands to execute at the end of G34 probing.
  * Useful to retract or move the Z probe out of the way.
  */
-//#define EVENT_GCODE_AFTER_G34 "G1 Z10 F12000\nG1 X15 Y330\nG1 Z0.5\nG1 Z10"
+#define EVENT_GCODE_AFTER_G34 "G60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nG4\nM280 P0 S0\nG4\nG0 Y300 F6000\nG61 S0"
 #endif
 
 /**
@@ -2356,7 +2356,7 @@
 #define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   #if ENABLED(DISTINCT_E_FACTORS)
-    #define ADVANCE_K { 0, 0, 0 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
+    #define ADVANCE_K { 0, 0 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
   #else
     #define ADVANCE_K 0        // (mm) Compression length applying to all extruders
   #endif
@@ -3466,11 +3466,11 @@
     // TMC2209: 0...255. TMC2130: -64...63
     #define X_STALL_SENSITIVITY  70
     #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-    #define Y_STALL_SENSITIVITY  110
+    #define Y_STALL_SENSITIVITY  115
     #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
-    #define Z_STALL_SENSITIVITY  255
-    #define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
-    #define Z3_STALL_SENSITIVITY Z_STALL_SENSITIVITY
+    //#define Z_STALL_SENSITIVITY  255
+    //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
+    //#define Z3_STALL_SENSITIVITY Z_STALL_SENSITIVITY
     //#define Z4_STALL_SENSITIVITY Z_STALL_SENSITIVITY
     //#define I_STALL_SENSITIVITY  8
     //#define J_STALL_SENSITIVITY  8

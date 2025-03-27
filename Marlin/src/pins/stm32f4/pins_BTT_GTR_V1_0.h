@@ -54,9 +54,9 @@
 //#define SOL0_PIN                            PC7   // Toolchanger
 
 #if ENABLED(TOOL_SENSOR)
-  #define TOOL_SENSOR1_PIN                  PG14
-  #define TOOL_SENSOR2_PIN                  PG9
-  #define TOOL_SENSOR3_PIN                  PD3  //FG
+  #define TOOL_SENSOR1_PIN                  PI11
+  #define TOOL_SENSOR2_PIN                  PH6
+  //#define TOOL_SENSOR3_PIN                  PD3  //FG
   //#define TOOL_SENSOR4_PIN                  PI11  //FG
   //#define TOOL_SENSOR5_PIN                  PH6  //FG
 #else
@@ -71,9 +71,9 @@
 #define Z_DIAG_PIN                          PE0   // Z-
 #define Z2_DIAG_PIN                         PI7   // Z-
 #define Z3_DIAG_PIN                         PF12  // Z-
-//#define E0_DIAG_PIN                         PG14  // X+
-//#define E1_DIAG_PIN                         PG9   // Y+
-//#define E2_DIAG_PIN                         PD3   // Z+
+#define E0_DIAG_PIN                         PG14  // X+
+#define E1_DIAG_PIN                         PG9   // Y+
+#define E2_DIAG_PIN                         PD3   // Z+
 
 //
 // Limit Switches
@@ -335,16 +335,16 @@
 
 #define HEATER_BED_PIN                      PA2   // Hotbed
 
-#define FAN0_PIN                            PE5   // Fan0 *FG defekt
-#define FAN1_PIN                            PE6   // Fan1
-#define FAN2_PIN                            PC8   // Fan2
+//#define FAN0_PIN                            PE5   // Fan0 *FG defekt
+#define FAN0_PIN                            PE6   // Fan1
+#define FAN1_PIN                            PC8   // Fan2
 
 #if ENABLED(M5_EXTENDER)
-  #define FAN3_PIN                          PI5   // M5 FAN1
-  #define FAN4_PIN                          PE9   // M5 FAN2
-  #define FAN5_PIN                          PE11  // M5 FAN3
-  #define FAN6_PIN                          PC9   // M5 FAN4  *FG Autofan E1
-  #define FAN7_PIN                          PE14  // M5 FAN5  *FG Autofan E0
+  #define FAN2_PIN                          PI5   // M5 FAN1
+  #define FAN3_PIN                          PE9   // M5 FAN2
+  #define FAN4_PIN                          PE11  // M5 FAN3
+  #define FAN5_PIN                          PC9   // M5 FAN4  *FG Autofan E1
+  #define FAN6_PIN                          PE14  // M5 FAN5  *FG Autofan E0
 #endif
 
 #ifndef SDCARD_CONNECTION

@@ -2131,13 +2131,13 @@
  * Commands to execute at the start of G29 probing,
  * after switching to the PROBING_TOOL.
  */
-//#define EVENT_GCODE_BEFORE_G29 "M300 P440 S200"
+//#define EVENT_GCODE_BEFORE_G29 "T0\nG60\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nG4\nM280 P0 S60\nG4\nG0 Y300 F6000\nG61"
 
 /**
  * Commands to execute at the end of G29 probing.
  * Useful to retract or move the Z probe out of the way.
  */
-//#define EVENT_GCODE_AFTER_G29 "G1 Z10 F12000\nG1 X15 Y330\nG1 Z0.5\nG1 Z10"
+//#define EVENT_GCODE_AFTER_G29 "G60\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nG4\nM280 P0 S0\nG4\nG0 Y300 F6000\nG61"
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable one of

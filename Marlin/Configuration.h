@@ -379,7 +379,7 @@
 // For the other hotends it is their distance from the extruder 0 hotend.
 //#define HOTEND_OFFSET_X { 0.0, 20.00 } // (mm) relative X-offset for each nozzle
 //#define HOTEND_OFFSET_Y { 0.0, 5.00 }  // (mm) relative Y-offset for each nozzle
-#define HOTEND_OFFSET_Z { 0.00, 0.00 }  // (mm) relative Z-offset for each nozzle
+#define HOTEND_OFFSET_Z { 0.00, 0.72 }  // (mm) relative Z-offset for each nozzle
 
 // @section multi-material
 
@@ -1653,7 +1653,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 15 }   //FG offset for carrier probe
+#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 13.92 }   //FG offset for carrier probe
 //#define NOZZLE_TO_PROBE_OFFSET { 0, 0, 15 }   //FG offset probe tool
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
@@ -1864,7 +1864,7 @@
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
 #define Z_AFTER_HOMING         5   // (mm) Height to move to after homing (if Z was homed)
-//#define XY_AFTER_HOMING { 10, 10 }  // (mm) Move to an XY position after homing (and raising Z)
+#define XY_AFTER_HOMING { X_CENTER, Y_CENTER }  // (mm) Move to an XY position after homing (and raising Z)
 
 //#define EVENT_GCODE_AFTER_HOMING "G90\nG60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nG4\nM280 P0 S0\nG4\nG0 Y300 F6000\nG61 S0"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
 

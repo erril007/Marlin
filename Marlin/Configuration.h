@@ -379,7 +379,7 @@
 // For the other hotends it is their distance from the extruder 0 hotend.
 //#define HOTEND_OFFSET_X { 0.0, 20.00 } // (mm) relative X-offset for each nozzle
 //#define HOTEND_OFFSET_Y { 0.0, 5.00 }  // (mm) relative Y-offset for each nozzle
-#define HOTEND_OFFSET_Z { 0.00, 0.72 }  // (mm) relative Z-offset for each nozzle
+#define HOTEND_OFFSET_Z { 0.00, 0.77 }  // (mm) relative Z-offset for each nozzle
 
 // @section multi-material
 
@@ -1653,7 +1653,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 13.92 }   //FG offset for carrier probe
+#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 13.87 }   //FG offset for carrier probe
 //#define NOZZLE_TO_PROBE_OFFSET { 0, 0, 15 }   //FG offset probe tool
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.

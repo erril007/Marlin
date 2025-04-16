@@ -1308,7 +1308,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 5, 120 }
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 10, 120 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -2130,7 +2130,7 @@
  * Commands to execute at the start of G29 probing,
  * after switching to the PROBING_TOOL.
  */
-#define EVENT_GCODE_BEFORE_G29 "T0\nG60 S0\nG0 X315 F10000\nG0 Y300 F10000\nG0 Y365 F5000\nG4\nM280 P0 S60\nG4\nG0 Y300 F6000\nM851 Z0\nG28 Z"
+#define EVENT_GCODE_BEFORE_G29 "T0\nG60 S0\nG0 X315 F10000\nG0 X315 Y300 F10000\nG0 X315 Y365 F5000\nG4\nM280 P0 S60\nG4\nG0 X315 Y300 F5000\nM851 Z0\nG28 Z"
 
 /**
  * Commands to execute at the end of G29 probing.

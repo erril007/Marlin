@@ -1655,7 +1655,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 13.95 }   //FG offset for carrier probe
+#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 13.97 }   //FG offset for carrier probe
 //#define NOZZLE_TO_PROBE_OFFSET { 0, 0, 15 }   //FG offset probe tool
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.

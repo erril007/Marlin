@@ -1240,7 +1240,7 @@ volatile bool Temperature::raw_temps_ready = false;
     MPC_t &mpc = hotend.mpc;
 
     // Move to center of bed, just above bed height and cool with max fan
-    gcode.home_all_axes(true);
+    home_if_needed();
     disable_all_heaters();
     #if HAS_FAN
       zero_fan_speeds();

@@ -3027,7 +3027,7 @@
 
   #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
 
-  //#define EDITABLE_HOMING_CURRENT   // Add a G-code and menu to modify the Homing Current
+  #define EDITABLE_HOMING_CURRENT   // Add a G-code and menu to modify the Homing Current
 
   /**
    * Interpolate microsteps to 256
@@ -3252,7 +3252,7 @@
    * point where a collision makes the motor skip instead of damaging the bed,
    * though this is unlikely to save delicate probes from being damaged.
    */
-  //#define PROBING_USE_CURRENT_HOME
+  #define PROBING_USE_CURRENT_HOME
 
   // @section tmc/spi
 

@@ -2375,7 +2375,7 @@
      * Higher k and higher XY acceleration may require larger ADVANCE_TAU to avoid skipping steps.
      */
     #if ENABLED(DISTINCT_E_FACTORS)
-      #define ADVANCE_TAU { 0.01, 0.01 }   // (s) Smoothing time to reduce extruder acceleration, per extruder
+      #define ADVANCE_TAU { 0.0075, 0.0075 }   // (s) Smoothing time to reduce extruder acceleration, per extruder
     #else
       #define ADVANCE_TAU 0.01       // (s) Smoothing time to reduce extruder acceleration
     #endif

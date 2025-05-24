@@ -1673,11 +1673,12 @@
 
 #endif // HAS_DISPLAY
 
-#if HAS_FEEDRATE_EDIT
+// Some displays offer Feedrate / Flow editing.
+#if ANY(HAS_MARLINUI_MENU, DWIN_CREALITY_LCD, DWIN_LCD_PROUI, MALYAN_LCD, TOUCH_SCREEN, ULTIPANEL_FEEDMULTIPLY)
   #define SPEED_EDIT_MIN    10  // (%) Feedrate percentage edit range minimum
   #define SPEED_EDIT_MAX   999  // (%) Feedrate percentage edit range maximum
 #endif
-#if HAS_FLOW_EDIT
+#if ANY(HAS_MARLINUI_MENU, DWIN_CREALITY_LCD, DWIN_LCD_PROUI, MALYAN_LCD, TOUCH_SCREEN)
   #define FLOW_EDIT_MIN     10  // (%) Flow percentage edit range minimum
   #define FLOW_EDIT_MAX    999  // (%) Flow percentage edit range maximum
 #endif
@@ -1938,6 +1939,9 @@
     //#define CUSTOM_FIRMWARE_UPLOAD
   #endif
 
+  // "Over-the-air" Firmware Update with M936 - Required to set EEPROM flag
+  //#define OTA_FIRMWARE_UPDATE
+
   /**
    * Set this option to one of the following (or the board's defaults apply):
    *
@@ -1960,8 +1964,8 @@
   #if ENABLED(MULTI_VOLUME)
     #define VOLUME_SD_ONBOARD
     #define VOLUME_USB_FLASH_DRIVE
-    #define DEFAULT_VOLUME SV_SD_ONBOARD
-    #define DEFAULT_SHARED_VOLUME SV_USB_FLASH_DRIVE
+    #define DEFAULT_VOLUME        SD_ONBOARD       // :[ 'SD_ONBOARD', 'USB_FLASH_DRIVE' ]
+    #define DEFAULT_SHARED_VOLUME USB_FLASH_DRIVE  // :[ 'SD_ONBOARD', 'USB_FLASH_DRIVE' ]
   #endif
 
 #endif // HAS_MEDIA
@@ -2352,6 +2356,24 @@
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
   //#define EXPERIMENTAL_I2S_LA   // Allow I2S_STEPPER_STREAM to be used with LA. Performance degrades as the LA step rate reaches ~20kHz.
+
+  //#define SMOOTH_LIN_ADVANCE    // Remove limits on acceleration by gradual increase of nozzle pressure
+  #if ENABLED(SMOOTH_LIN_ADVANCE)
+    /**
+     * ADVANCE_TAU is also the time ahead that the smoother needs to look
+     * into the planner, so the planner needs to have enough blocks loaded.
+     * For k=0.04 at 10k acceleration and an "Orbiter 2" extruder it can be as low as 0.0075.
+     * Adjust by lowering the value until you observe the extruder skipping, then raise slightly.
+     * Higher k and higher XY acceleration may require larger ADVANCE_TAU to avoid skipping steps.
+     */
+    #if ENABLED(DISTINCT_E_FACTORS)
+      #define ADVANCE_TAU { 0.02 }   // (s) Smoothing time to reduce extruder acceleration, per extruder
+    #else
+      #define ADVANCE_TAU 0.02       // (s) Smoothing time to reduce extruder acceleration
+    #endif
+    #define SMOOTH_LIN_ADV_HZ 1000   // (Hz) How often to update extruder speed
+    #define INPUT_SHAPING_E_SYNC     // Synchronize the extruder-shaped XY axes (to increase precision)
+  #endif
 #endif
 
 /**

@@ -1093,7 +1093,7 @@
    * Commands to execute at the start of G34 probing,
    * after switching to the PROBING_TOOL.
    */
-  //#define EVENT_GCODE_BEFORE_G34 "M300 P440 S200"
+  #define EVENT_GCODE_BEFORE_G34 "T0\nG60 S0\nG0 X315 F10000\nG0 X315 Y300 F10000\nG0 X315 Y365 F5000\nG4\nM280 P0 S60\nG4\nG0 X315 Y300 F5000\nM851 Z0\nG28 Z"
 
   /**
    * Commands to execute at the end of G34 probing.

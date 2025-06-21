@@ -1082,23 +1082,26 @@
   #define G34_MAX_GRADE              5     // (%) Maximum incline that G34 will handle
   #define Z_STEPPER_ALIGN_ITERATIONS 10    // Number of iterations to apply during alignment
   #define Z_STEPPER_ALIGN_ACC        0.005 // Stop iterating early if the accuracy is better than this
+
   #define RESTORE_LEVELING_AFTER_G34       // Restore leveling after G34 is done?
+
   // After G34, re-home Z (G28 Z) or just calculate it from the last probe heights?
   // Re-homing might be more precise in reproducing the actual 'G28 Z' homing height, especially on an uneven bed.
   #define HOME_AFTER_G34
 
-/**
- * Commands to execute at the start of G34 probing,
- * after switching to the PROBING_TOOL.
- */
-#define EVENT_GCODE_BEFORE_G34 "T0\nG60 S0\nG0 X315 F10000\nG0 X315 Y300 F10000\nG0 X315 Y365 F5000\nG4\nM280 P0 S60\nG4\nG0 X315 Y300 F5000\nM851 Z0\nG28 Z"
+  /**
+   * Commands to execute at the start of G34 probing,
+   * after switching to the PROBING_TOOL.
+   */
+  //#define EVENT_GCODE_BEFORE_G34 "M300 P440 S200"
 
-/**
- * Commands to execute at the end of G34 probing.
- * Useful to retract or move the Z probe out of the way.
- */
-//#define EVENT_GCODE_AFTER_G34 "G60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nG4\nM280 P0 S0\nG4\nG0 Y300 F6000\nG61 S0"
-#endif
+  /**
+   * Commands to execute at the end of G34 probing.
+   * Useful to retract or move the Z probe out of the way.
+   */
+  //#define EVENT_GCODE_AFTER_G34 "G1 Z10 F12000\nG1 X15 Y330\nG1 Z0.5\nG1 Z10"
+
+#endif // Z_STEPPER_AUTO_ALIGN
 
 /**
  * Assisted Tramming

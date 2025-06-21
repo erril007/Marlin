@@ -144,7 +144,7 @@ void GcodeSuite::G34() {
       probe.use_probing_tool();
 
       #ifdef EVENT_GCODE_BEFORE_G34
-        if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("Before G34 G-code: ", EVENT_GCODE_BEFORE_G34);
+        if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("Before G34 G-code: ", F(EVENT_GCODE_BEFORE_G34));
         gcode.process_subcommands_now(F(EVENT_GCODE_BEFORE_G34));
       #endif
 
@@ -219,19 +219,20 @@ void GcodeSuite::G34() {
           // Probing sanity check is disabled, as it would trigger even in normal cases because
           // current_position.z has been manually altered in the "dirty trick" above.
 
-          if (DEBUGGING(LEVELING))
-            DEBUG_ECHOLNPGM(
-              "Z_PROBE_LOW_POINT: ", p_float_t(Z_PROBE_LOW_POINT, 3),
-              "z_probe: ", p_float_t(z_probe, 3),
-              "Probe Tgt: ", p_float_t((Z_PROBE_LOW_POINT) - z_probe * 0.5f, 3)
-            );
+          const float minz = (Z_PROBE_LOW_POINT) - (z_probe * 0.5f);
+
+          if (DEBUGGING(LEVELING)) {
+            DEBUG_ECHOPGM("Z_PROBE_LOW_POINT: " STRINGIFY(Z_PROBE_LOW_POINT));
+            DEBUG_ECHOLNPGM(" z_probe: ", p_float_t(z_probe, 3),
+                            " Probe Tgt: ", p_float_t(minz, 3));
+          }
 
           const float z_probed_height = probe.probe_at_point(
             DIFF_TERN(HAS_HOME_OFFSET, ppos, xy_pos_t(home_offset)),   // xy
             raise_after,                                               // raise_after
             (DEBUGGING(LEVELING) || DEBUGGING(INFO)) ? 3 : 0,          // verbose_level
             true, false,                                               // probe_relative, sanity_check
-            (Z_PROBE_LOW_POINT) - (z_probe * 0.5f),                    // z_min_point
+            minz,                                                      // z_min_point
             Z_TWEEN_SAFE_CLEARANCE                                     // z_clearance
           );
 
@@ -308,7 +309,7 @@ void GcodeSuite::G34() {
 
         SERIAL_EOL();
 
-        SString<15 + TERN0(TRIPLE_Z, 30) + TERN0(QUAD_Z, 45)> msg(F("1-2="), p_float_t(ABS(z_measured[1] - z_measured[0]), 3));
+        SString<15 + TERN0(TRIPLE_Z, 30) + TERN0(QUAD_Z, 45)> msg(F("2-1="), p_float_t(ABS(z_measured[1] - z_measured[0]), 3));
         #if TRIPLE_Z
           msg.append(F(" 3-2="), p_float_t(ABS(z_measured[2] - z_measured[1]), 3))
              .append(F(" 3-1="), p_float_t(ABS(z_measured[2] - z_measured[0]), 3));
@@ -446,7 +447,7 @@ void GcodeSuite::G34() {
       #endif
 
       #ifdef EVENT_GCODE_AFTER_G34
-        if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("After G34 G-code: ", EVENT_GCODE_AFTER_G34);
+        if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM("After G34 G-code: ", F(EVENT_GCODE_AFTER_G34));
         planner.synchronize();
         process_subcommands_now(F(EVENT_GCODE_AFTER_G34));
       #endif

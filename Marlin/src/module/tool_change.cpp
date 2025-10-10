@@ -443,15 +443,15 @@ void fast_line_to_current(const AxisEnum fr_axis) { _line_to_current(fr_axis, 0.
 
 #endif // TOOL_SENSOR
 
-#if ENABLED(SWITCHING_TOOLHEAD)
+#if ANY(SWITCHING_TOOLHEAD, MAGNETIC_SWITCHING_TOOLHEAD, ELECTROMAGNETIC_SWITCHING_TOOLHEAD)
 
   inline void switching_toolhead_lock(const bool locked) {
     #ifdef SWITCHING_TOOLHEAD_SERVO_ANGLES
       const uint16_t swt_angles[2] = SWITCHING_TOOLHEAD_SERVO_ANGLES;
       servo[SWITCHING_TOOLHEAD_SERVO_NR].move(swt_angles[locked ? 0 : 1]);
-    #elif PIN_EXISTS(SWT_SOLENOID)
-      OUT_WRITE(SWT_SOLENOID_PIN, locked);
-      gcode.dwell(10);
+    #elif PIN_EXISTS(SOL0)
+      OUT_WRITE(SOL0_PIN, locked);
+      gcode.dwell(10); //shouldn't this be safe_delay(10); ?
     #else
       #error "No toolhead locking mechanism configured."
     #endif
@@ -497,83 +497,235 @@ void fast_line_to_current(const AxisEnum fr_axis) { _line_to_current(fr_axis, 0.
     #endif // TOOL_SENSOR
   }
 
-  inline void switching_toolhead_tool_change(const uint8_t new_tool, bool no_move/*=false*/) {
+  inline void switching_toolhead_tool_change(const uint8_t new_tool, bool no_move/*=false*/, xyz_pos_t diff) {
     if (no_move) return;
 
     constexpr float toolheadposx[] = SWITCHING_TOOLHEAD_X_POS;
     const float placexpos = toolheadposx[active_extruder],
                 grabxpos = toolheadposx[new_tool];
+    const xyz_pos_t &hoffs = hotend_offset[active_extruder];
+
+    #if ENABLED(MAGNETIC_SWITCHING_TOOLHEAD)
+      constexpr float toolheadclearx[] = SWITCHING_TOOLHEAD_X_SECURITY;
+      const float placexclear = toolheadclearx[active_extruder],
+                  grabxclear = toolheadclearx[new_tool];
+    #endif
 
     (void)check_tool_sensor_stats(active_extruder, true);
 
     /**
-     * 1. Move to switch position of current toolhead
-     * 2. Unlock tool and drop it in the dock
-     * 3. Move to the new toolhead
-     * 4. Grab and lock the new toolhead
+     * 0. Raise Z-Axis to give enough clearance (optional)
+     * 1. Move to X and Y Clear Position of active toolhead
+     * 2. Move gentley to Y position of active toolhead
+     * 3. Release and place active toolhead in the dock
+     * 4. Backup to Y Clear Position
+     * 5. Move to new toolhead position
+     * 6. Move gentley to Y Position of new toolhead
+     * 7. Grab the new toolhead
+     * 8. Prime new tool (optional)
+     * 9. Apply Z Offset to new toolhead
+     * 10. Move to Y Clear Position
+     * 11. Apply XY Offset to new toolhead
      */
-
-    // 1. Move to switch position of current toolhead
 
     DEBUG_POS("Start ST Tool-Change", current_position);
 
-    current_position.x = placexpos;
+    // 0. Raise Z-Axis to give enough clearance
+    #ifdef SWITCHING_TOOLHEAD_Z_HOP
+      current_position.z += SWITCHING_TOOLHEAD_Z_HOP;
+      DEBUG_POS("(0) Raise Z-Axis ", current_position);
+      fast_line_to_current(Z_AXIS);
+    #endif
 
-    DEBUG_ECHOLNPGM("(1) Place old tool ", active_extruder);
-    DEBUG_POS("Move X SwitchPos", current_position);
+    // 1. Move to X and Y Clear Position of active toolhead
+    DEBUG_ECHOLNPGM("(1) Move to X and Y Clear Position of T", active_extruder);
 
-    fast_line_to_current(X_AXIS);
+    #if ENABLED(SWITCHING_TOOLHEAD_QUICK)
+      TERN(MAGNETIC_SWITCHING_TOOLHEAD, current_position.x = placexclear, current_position.x = placexpos);
+      current_position.y = SWITCHING_TOOLHEAD_Y_POS - SWITCHING_TOOLHEAD_Y_CLEAR;
+      DEBUG_POS("Move to XY SwitchPos - Y Clear", current_position);
+      fast_line_to_current(Y_AXIS);
+    #else
+      TERN(MAGNETIC_SWITCHING_TOOLHEAD, current_position.x = placexclear, current_position.x = placexpos);
+      DEBUG_POS("Move to X SwitchPos", current_position);
+      fast_line_to_current(X_AXIS);
 
-    current_position.y = SWITCHING_TOOLHEAD_Y_POS - (SWITCHING_TOOLHEAD_Y_SECURITY);
+      current_position.y = SWITCHING_TOOLHEAD_Y_POS - SWITCHING_TOOLHEAD_Y_CLEAR;
+      DEBUG_POS("Move to Y SwitchPos - Y Clear", current_position);
+      fast_line_to_current(Y_AXIS);
+    #endif
 
-    DEBUG_SYNCHRONIZE();
-    DEBUG_POS("Move Y SwitchPos + Security", current_position);
+    #if ENABLED(SWITCHING_TOOLHEAD)
 
+      // 2. Move gentley to Y position of active toolhead
+      current_position.y = SWITCHING_TOOLHEAD_Y_POS - SWITCHING_TOOLHEAD_Y_SECURITY;
+      DEBUG_SYNCHRONIZE();
+      DEBUG_POS("(2) Move to Y SwitchPos - Y Security", current_position);
+      slow_line_to_current(Y_AXIS);
+
+      // 3. Release and place active toolhead in the dock
+      TERN_(TOOL_SENSOR, tool_sensor_disabled = true);
+
+      planner.synchronize();
+      DEBUG_ECHOLNPGM("(3) Release and place T", active_extruder);
+      switching_toolhead_lock(false);
+      safe_delay(500);
+
+      current_position.y = SWITCHING_TOOLHEAD_Y_POS;
+      DEBUG_POS("Move to Y SwitchPos", current_position);
+      slow_line_to_current(Y_AXIS);
+
+      // Wait for move to complete, then another 0.2s
+      planner.synchronize();
+      safe_delay(200);
+
+    #elif ENABLED(MAGNETIC_SWITCHING_TOOLHEAD)
+
+      // 2. Move gentley to Y position of active toolhead
+      current_position.y = SWITCHING_TOOLHEAD_Y_POS;
+      DEBUG_SYNCHRONIZE();
+      DEBUG_POS("Move Y SwitchPos", current_position);
+      slow_line_to_current(Y_AXIS);
+
+      current_position.x = placexpos;
+      DEBUG_SYNCHRONIZE();
+      DEBUG_POS("Move X SwitchPos", current_position);
+      line_to_current_position(planner.settings.max_feedrate_mm_s[X_AXIS] * 0.25f);
+
+      // 3. Release and place active toolhead in the dock
+
+      DEBUG_SYNCHRONIZE();
+      DEBUG_ECHOLNPGM("(3) Release and place active toolhead in the dock");
+
+      current_position.y = SWITCHING_TOOLHEAD_Y_POS - SWITCHING_TOOLHEAD_Y_RELEASE;
+      DEBUG_POS("Move Y SwitchPos - Release", current_position);
+      line_to_current_position(planner.settings.max_feedrate_mm_s[Y_AXIS] * 0.1f);
+
+      current_position.y = SWITCHING_TOOLHEAD_Y_POS - SWITCHING_TOOLHEAD_Y_SECURITY;
+      DEBUG_SYNCHRONIZE();
+      DEBUG_POS("Move Y SwitchPos - Security", current_position);
+      line_to_current_position(planner.settings.max_feedrate_mm_s[Y_AXIS]);
+
+    #elif ENABLED(ELECTROMAGNETIC_SWITCHING_TOOLHEAD)
+      //TODO
+      // 2. Move gentley to Y position of active toolhead
+
+      // 3. Release and place active toolhead in the dock
+      DEBUG_SYNCHRONIZE();
+      SERIAL_ECHOLNPGM("(3) Move gently to park position of active extruder", active_extruder);
+      DEBUG_POS("Moving ParkPos", current_position);
+
+      current_position.y -= SWITCHING_TOOLHEAD_Y_CLEAR;
+      slow_line_to_current(Y_AXIS);
+
+      // 4. Disengage magnetic field, wait for delay
+
+      planner.synchronize();
+      DEBUG_ECHOLNPGM("(4) Disengage magnet");
+      switching_toolhead_lock(false);
+
+    #endif
+
+    // 4. Backup to Y clear position
+    current_position.y = SWITCHING_TOOLHEAD_Y_POS - SWITCHING_TOOLHEAD_Y_CLEAR;
+    DEBUG_POS("(4) Backup to Y clear position", current_position);
     slow_line_to_current(Y_AXIS);
-
-    // 2. Unlock tool and drop it in the dock
-    TERN_(TOOL_SENSOR, tool_sensor_disabled = true);
-
-    planner.synchronize();
-    DEBUG_ECHOLNPGM("(2) Unlock and Place Toolhead");
-    switching_toolhead_lock(false);
-    safe_delay(500);
-
-    current_position.y = SWITCHING_TOOLHEAD_Y_POS;
-    DEBUG_POS("Move Y SwitchPos", current_position);
-    slow_line_to_current(Y_AXIS);
-
-    // Wait for move to complete, then another 0.2s
-    planner.synchronize();
-    safe_delay(200);
-
-    current_position.y -= SWITCHING_TOOLHEAD_Y_CLEAR;
-    DEBUG_POS("Move back Y clear", current_position);
-    slow_line_to_current(Y_AXIS); // move away from docked toolhead
 
     (void)check_tool_sensor_stats(active_extruder);
 
-    // 3. Move to the new toolhead
-
+    // 5. Move to new toolhead X position
     current_position.x = grabxpos;
-
     DEBUG_SYNCHRONIZE();
-    DEBUG_ECHOLNPGM("(3) Move to new toolhead position");
-    DEBUG_POS("Move to new toolhead X", current_position);
-
+    DEBUG_POS("(5) Move to new toolhead X position", current_position);
     fast_line_to_current(X_AXIS);
 
-    current_position.y = SWITCHING_TOOLHEAD_Y_POS - (SWITCHING_TOOLHEAD_Y_SECURITY);
+    #if ENABLED(SWITCHING_TOOLHEAD)
 
-    DEBUG_SYNCHRONIZE();
-    DEBUG_POS("Move Y SwitchPos + Security", current_position);
+      // 6. Move gentley to Y Position of new toolhead
+      current_position.y = SWITCHING_TOOLHEAD_Y_POS - SWITCHING_TOOLHEAD_Y_SECURITY;
+      DEBUG_SYNCHRONIZE();
+      DEBUG_POS("(6) Move gentley to new toolhead Y SwitchPos - Y Security", current_position);
+      slow_line_to_current(Y_AXIS);
 
-    slow_line_to_current(Y_AXIS);
+      // Wait for move to finish, pause 0.2s, move servo, pause 0.5s
+      planner.synchronize();
+      safe_delay(200);
 
+      (void)check_tool_sensor_stats(new_tool, true, true);
+
+      // 7. Grab the new toolhead
+      DEBUG_SYNCHRONIZE();
+      DEBUG_ECHOLNPGM("(7) Grab the new toolhead");
+      switching_toolhead_lock(true);
+      safe_delay(500);
+
+      current_position.y = SWITCHING_TOOLHEAD_Y_POS;
+      DEBUG_SYNCHRONIZE();
+      DEBUG_POS("Move to Y SwitchPos", current_position);
+      slow_line_to_current(Y_AXIS);
+
+    #elif ENABLED(MAGNETIC_SWITCHING_TOOLHEAD)
+
+      // 6. Move gentley to Y Position of new toolhead
+      current_position.y = SWITCHING_TOOLHEAD_Y_POS;
+      DEBUG_SYNCHRONIZE();
+      DEBUG_POS("(6)Move gentley to Y Position of new toolhead", current_position);
+      slow_line_to_current(Y_AXIS);
+
+      // 7. Grab the new toolhead
+      current_position.x = grabxclear;
+      DEBUG_POS("(7)Grab the new toolhead", current_position);
+      _line_to_current(X_AXIS, 0.1f);
+
+      planner.synchronize();
+      safe_delay(100); // Give switch time to settle
+
+    #elif ENABLED(ELECTROMAGNETIC_SWITCHING_TOOLHEAD)
+      //TODO
+      // 6. Move gentley to Y Position of new toolhead
+
+      // 7. Grab the new toolhead
+
+    #endif
+
+    // 8. Prime new tool
+    //TODO: maybe some debug info about prime lengh and retract?
+    #if ENABLED(PRIME_BEFORE_REMOVE) && (SWITCHING_TOOLHEAD_PRIME_MM || SWITCHING_TOOLHEAD_RETRACT_MM)
+      #if SWITCHING_TOOLHEAD_PRIME_MM
+        current_position.e += SWITCHING_TOOLHEAD_PRIME_MM;
+        planner.buffer_line(current_position, MMM_TO_MMS(SWITCHING_TOOLHEAD_PRIME_FEEDRATE), new_tool);
+      #endif
+      #if SWITCHING_TOOLHEAD_RETRACT_MM
+        current_position.e -= SWITCHING_TOOLHEAD_RETRACT_MM;
+        planner.buffer_line(current_position, MMM_TO_MMS(SWITCHING_TOOLHEAD_RETRACT_FEEDRATE), new_tool);
+      #endif
+    #endif
+
+    // 9. Apply Z-offset to new toolhead
+    DEBUG_POS("(9) Applying Z-offset", current_position);
+    current_position.z += diff.z;
+    fast_line_to_current(Z_AXIS);
+
+    // 10. Backup to Y clear position
+    current_position.y = SWITCHING_TOOLHEAD_Y_POS - SWITCHING_TOOLHEAD_Y_CLEAR;
+    DEBUG_POS("(10) Backup to Y clear position", current_position);
+    slow_line_to_current(Y_AXIS); // Move away from docked toolhead
+
+    // 11. Apply XY-offset
+    current_position.x += diff.x;
+    current_position.y += diff.y;
+    _line_to_current(X_AXIS, 0.5f);
+
+    planner.synchronize();        // Always sync the final move
+
+    (void)check_tool_sensor_stats(new_tool, true, true);
+
+    DEBUG_POS("ST Tool-Change done.", current_position);
+
+    /**
     // 4. Grab and lock the new toolhead
 
     current_position.y = SWITCHING_TOOLHEAD_Y_POS;
-
     DEBUG_SYNCHRONIZE();
     DEBUG_ECHOLNPGM("(4) Grab and lock new toolhead");
     DEBUG_POS("Move Y SwitchPos", current_position);
@@ -597,7 +749,9 @@ void fast_line_to_current(const AxisEnum fr_axis) { _line_to_current(fr_axis, 0.
     (void)check_tool_sensor_stats(new_tool, true, true);
 
     DEBUG_POS("ST Tool-Change done.", current_position);
-  }
+     */
+
+  } // SWITCHING_TOOLHEAD
 
 #elif ENABLED(MAGNETIC_SWITCHING_TOOLHEAD)
 
@@ -718,7 +872,7 @@ void fast_line_to_current(const AxisEnum fr_axis) { _line_to_current(fr_axis, 0.
     planner.synchronize(); // Always sync last tool-change move
 
     DEBUG_POS("MST Tool-Change done.", current_position);
-  }
+  } // MAGNETIC_SWITCHING_TOOLHEAD
 
 #elif ENABLED(ELECTROMAGNETIC_SWITCHING_TOOLHEAD)
 
@@ -1283,7 +1437,7 @@ void tool_change(const uint8_t new_tool, bool no_move/*=false*/) {
       #elif ENABLED(MAGNETIC_PARKING_EXTRUDER)                          // Magnetic Parking extruder
         magnetic_parking_extruder_tool_change(new_tool);
       #elif ENABLED(SWITCHING_TOOLHEAD)                                 // Switching Toolhead
-        switching_toolhead_tool_change(new_tool, no_move);
+        switching_toolhead_tool_change(new_tool, no_move, diff);
       #elif ENABLED(MAGNETIC_SWITCHING_TOOLHEAD)                        // Magnetic Switching Toolhead
         magnetic_switching_toolhead_tool_change(new_tool, no_move);
       #elif ENABLED(ELECTROMAGNETIC_SWITCHING_TOOLHEAD)                 // Magnetic Switching ToolChanger

@@ -1165,7 +1165,7 @@
   #define FTM_SHAPING_ZETA_Y            0.1f    // Zeta used by input shapers for Y axis
   #define FTM_SHAPING_V_TOL_Y           0.05f   // Vibration tolerance used by EI input shapers for Y axis
 
-  //#define FTM_SHAPER_Z                        // Include Z shaping support
+  #define FTM_SHAPER_Z                        // Include Z shaping support
   #define FTM_DEFAULT_SHAPER_Z      ftMotionShaper_NONE // Default shaper mode on Z axis
   #define FTM_SHAPING_DEFAULT_FREQ_Z   21.0f    // (Hz) Default peak frequency used by input shapers
   #define FTM_SHAPING_ZETA_Z            0.03f   // Zeta used by input shapers for Z axis
@@ -1206,7 +1206,7 @@
                                             // The total buffered time in seconds is (FTM_BUFFER_SIZE/FTM_FS)
   #define FTM_FS                     1000   // (Hz) Frequency for trajectory generation.
   #define FTM_STEPPER_FS        2'000'000   // (Hz) Time resolution of stepper I/O update. Shouldn't affect CPU much (slower board testing needed)
-  #define FTM_MIN_SHAPE_FREQ           20   // (Hz) Minimum shaping frequency, lower consumes more RAM
+  #define FTM_MIN_SHAPE_FREQ           10   // (Hz) Minimum shaping frequency, lower consumes more RAM
 
 #endif // FT_MOTION
 

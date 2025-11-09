@@ -1178,7 +1178,9 @@
   #define FTM_SHAPING_ZETA_E            0.03f   // Zeta used by input shapers for E axis
   #define FTM_SHAPING_V_TOL_E           0.05f   // Vibration tolerance used by EI input shapers for E axis
 
-  #define FTM_SMOOTHING                       // Smoothing can reduce artifacts and make steppers quieter
+  //#define FTM_RESONANCE_TEST                  // Sine sweep motion for resonance study
+
+  //#define FTM_SMOOTHING                       // Smoothing can reduce artifacts and make steppers quieter
                                                 // on sharp corners, but too much will round corners.
   #if ENABLED(FTM_SMOOTHING)
     #define FTM_MAX_SMOOTHING_TIME      0.10f   // (s) Maximum smoothing time. Higher values consume more RAM.
@@ -1190,7 +1192,7 @@
                                                 //     smoothing acceleration peaks, which may also smooth curved surfaces.
   #endif
 
-  #define FTM_TRAJECTORY_TYPE   POLY5       // Block acceleration profile (TRAPEZOIDAL, POLY5, POLY6)
+  #define FTM_TRAJECTORY_TYPE   POLY6       // Block acceleration profile (TRAPEZOIDAL, POLY5, POLY6)
                                             // TRAPEZOIDAL: Continuous Velocity. Max acceleration is respected.
                                             // POLY5:       Like POLY6 with 1.5x but uses less CPU.
                                             // POLY6:       Continuous Acceleration (aka S_CURVE).
@@ -1627,7 +1629,7 @@
     #if HAS_MARLINUI_U8GLIB
       #define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~3260 (or ~940) bytes of flash.
     #endif
-    #if ANY(HAS_MARLINUI_U8GLIB, TOUCH_UI_FTDI_EVE, HAS_MARLINUI_HD44780)
+    #if ANY(HAS_MARLINUI_U8GLIB, TOUCH_UI_FTDI_EVE, HAS_MARLINUI_HD44780, HAS_GRAPHICAL_TFT)
       //#define SHOW_CUSTOM_BOOTSCREEN    // Show the bitmap in Marlin/_Bootscreen.h on startup.
     #endif
   #endif

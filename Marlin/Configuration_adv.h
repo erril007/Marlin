@@ -1149,7 +1149,7 @@
  */
 #define FT_MOTION
 #if ENABLED(FT_MOTION)
-  //#define FTM_IS_DEFAULT_MOTION               // Use FT Motion as the factory default?
+  #define FTM_IS_DEFAULT_MOTION               // Use FT Motion as the factory default?
   #define FT_MOTION_MENU                      // Provide a MarlinUI menu to set M493 and M494 parameters
   #define FTM_HOME_AND_PROBE                  // Use FT Motion for homing / probing. Disable if FT Motion breaks these functions.
 

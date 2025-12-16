@@ -1664,7 +1664,7 @@
  * Nozzle-to-Probe offsets { X, Y, Z }
  *
  * X and Y offset
- *   Use a caliper or ruler to measure the distance from the tip of
+ *   Use a caliper or ruler to measure the distance (in mm) from the tip of
  *   the Nozzle to the center-point of the Probe in the X and Y axes.
  *
  * Z offset
@@ -1700,8 +1700,8 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 13.95 }   //FG offset for carrier probe
-//#define NOZZLE_TO_PROBE_OFFSET { 0, 0, 15 }   //FG offset probe tool
+#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 13.95 }   //FG offset for carrier probe // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
+//#define NOZZLE_TO_PROBE_OFFSET { 0, 0, 15 }   //FG offset probe tool // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 //#define PROBING_TOOL 0

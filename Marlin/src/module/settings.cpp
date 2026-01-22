@@ -4117,6 +4117,7 @@ void MarlinSettings::reset() {
     // Fixed-Time Motion
     //
     TERN_(FT_MOTION, gcode.M493_report(forReplay));
+    TERN_(FTM_SMOOTHING, gcode.M494_report(forReplay));
 
     //
     // Nonlinear Extrusion

@@ -49,7 +49,7 @@ void say_ftm_settings() {
 void GcodeSuite::M494_report(const bool forReplay/*=true*/) {
   TERN_(MARLIN_SMALL_BUILD, return);
 
-  report_heading_etc(forReplay, F("FT Motion"));
+  report_heading_etc(forReplay, F("FTM Smoothing"));
   SERIAL_ECHOPGM("  M494 T", (uint8_t)ftMotion.getTrajectoryType());
 
   #if ANY(FTM_POLYS, FTM_SMOOTHING)

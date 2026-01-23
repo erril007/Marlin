@@ -34,7 +34,7 @@
 
 #include <SPI.h>
 
-#include "../../../MarlinCore.h" // for marlin_state
+#include "../../../MarlinCore.h" // for marlin.is()
 #include "../../../sd/cardreader.h"
 #include "../../../module/motion.h"
 #include "../../../module/planner.h"
@@ -579,7 +579,7 @@ char *creat_title_text() {
         update_spi_flash();
       }
       card.closefile();
-    #endif
+    #endif // HAS_MEDIA
   }
 
   void gcode_preview(char *path, int xpos_pixel, int ypos_pixel) {
@@ -651,7 +651,7 @@ char *creat_title_text() {
         if (card.isFileOpen()) {
           feedrate_percentage = 100;
           TERN_(HAS_EXTRUDERS, planner.set_flow(0, 100));
-          TERN_(HAS_MULTI_EXTRUDER, planner.set_flow(1, 100));
+          E_TERN_(planner.set_flow(1, 100));
           card.startOrResumeFilePrinting();
           TERN_(POWER_LOSS_RECOVERY, recovery.prepare());
           once_flag = false;
@@ -662,27 +662,27 @@ char *creat_title_text() {
   }
 
   void draw_default_preview(int xpos_pixel, int ypos_pixel, uint8_t sel) {
-    int index;
+    static constexpr uint16_t draw_col_count = 40; // Number of rows displayed each time, determines the size of bmp_public_buf
+    static constexpr int draw_count = 200 / draw_col_count; // Total number of times to be displayed
+    static constexpr uint32_t pixel_count = (DEFAULT_VIEW_MAX_SIZE) / draw_count; // Number of pixels read per time (uint8_t)
     int y_off = 0;
-    W25QXX.init(SPI_QUARTER_SPEED);
-    for (index = 0; index < 10; index++) { // 200*200
+    for (int index = 0; index < draw_count; index++) { // 200*200
       #if HAS_BAK_VIEW_IN_FLASH
         if (sel == 1) {
-          flash_view_Read(bmp_public_buf, 8000); // 20k
+          flash_view_Read(bmp_public_buf, pixel_count); // 16k
         }
         else {
-          default_view_Read(bmp_public_buf, DEFAULT_VIEW_MAX_SIZE / 10); // 8k
+          default_view_Read(bmp_public_buf, pixel_count); // 16k
         }
       #else
-        default_view_Read(bmp_public_buf, DEFAULT_VIEW_MAX_SIZE / 10); // 8k
+        default_view_Read(bmp_public_buf, pixel_count); // 8k
       #endif
 
-      SPI_TFT.setWindow(xpos_pixel, y_off * 20 + ypos_pixel, 200, 20); // 200*200
-      SPI_TFT.tftio.writeSequence((uint16_t*)(bmp_public_buf), DEFAULT_VIEW_MAX_SIZE / 20);
+      SPI_TFT.setWindow(xpos_pixel, y_off * draw_col_count + ypos_pixel, 200, draw_col_count); // 200 * draw_col_count
+      SPI_TFT.tftio.writeSequence((uint16_t*)(bmp_public_buf), uint16_t(pixel_count / 2));
 
       y_off++;
     }
-    W25QXX.init(SPI_QUARTER_SPEED);
   }
 
   void disp_pre_gcode(int xpos_pixel, int ypos_pixel) {
@@ -700,6 +700,7 @@ char *creat_title_text() {
       }
     #endif
   }
+
 #endif // HAS_GCODE_PREVIEW
 
 void print_time_run() {
@@ -756,7 +757,7 @@ void GUI_RefreshPage() {
         disp_print_time();
         disp_fan_Zpos();
       }
-      if (printing_rate_update_flag || marlin_state == MarlinState::MF_SD_COMPLETE) {
+      if (printing_rate_update_flag || marlin.is(MF_SD_COMPLETE)) {
         printing_rate_update_flag = false;
         if (!gcode_preview_over) setProBarRate();
       }
@@ -1143,9 +1144,9 @@ lv_obj_t* lv_screen_create(DISP_STATE newScreenType, const char *title) {
   // title
   lv_obj_t *titleLabel = nullptr;
   if (!title)
-    titleLabel = lv_label_create(scr, TITLE_XPOS, TITLE_YPOS, creat_title_text());
+    titleLabel = lv_label_create(scr, TITLE_POS_X, TITLE_POS_Y, creat_title_text());
   else if (title[0] != '\0')
-    titleLabel = lv_label_create(scr, TITLE_XPOS, TITLE_YPOS, title);
+    titleLabel = lv_label_create(scr, TITLE_POS_X, TITLE_POS_Y, title);
   if (titleLabel)
     lv_obj_set_style(titleLabel, &tft_style_label_rel);
 

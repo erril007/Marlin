@@ -40,13 +40,14 @@ namespace LanguageNarrow_fr_na {
   LSTR MSG_YES                            = _UxGT("Oui");
   LSTR MSG_NO                             = _UxGT("Non");
   LSTR MSG_BACK                           = _UxGT("Retour");
+
   LSTR MSG_MEDIA_ABORTING                 = _UxGT("Annulation...");
   LSTR MSG_MEDIA_INSERTED                 = _UxGT("Media insere");
   LSTR MSG_MEDIA_REMOVED                  = _UxGT("Media retire");
-  LSTR MSG_MEDIA_WAITING                  = _UxGT("Attente media");
   LSTR MSG_MEDIA_READ_ERROR               = _UxGT("Err lecture media");
-  LSTR MSG_MEDIA_USB_REMOVED              = _UxGT("USB debranche");
-  LSTR MSG_MEDIA_USB_FAILED               = _UxGT("Erreur media USB");
+  LSTR MSG_USB_FD_DEVICE_REMOVED          = _UxGT("USB debranche");
+  LSTR MSG_USB_FD_USB_FAILED              = _UxGT("Erreur media USB");
+
   LSTR MSG_LCD_ENDSTOPS                   = _UxGT("Butees");
   LSTR MSG_LCD_SOFT_ENDSTOPS              = _UxGT("Butees SW");
   LSTR MSG_MAIN_MENU                      = _UxGT("Menu principal");
@@ -260,8 +261,6 @@ namespace LanguageNarrow_fr_na {
   LSTR MSG_PID_BAD_HEATER_ID              = _UxGT("Echec Autotune! E incorrect");
   LSTR MSG_PID_TEMP_TOO_HIGH              = _UxGT("Echec Autotune! Temp. trop haute");
   LSTR MSG_PID_TIMEOUT                    = _UxGT("Echec Autotune! Oper. expiree");
-
-  LSTR MSG_TEMP_TOO_LOW                   = _UxGT("Temperature trop basse");
 
   LSTR MSG_SELECT_E                       = _UxGT("Selectionner *");
   LSTR MSG_ACC                            = _UxGT("Acceleration");
@@ -609,6 +608,7 @@ namespace LanguageNarrow_fr_na {
   LSTR DGUS_MSG_NOT_WHILE_PRINTING        = _UxGT("Impossible pendant une impression");
   LSTR DGUS_MSG_NOT_WHILE_IDLE            = _UxGT("Impossible tant que l'imprimante est en attente");
   LSTR DGUS_MSG_NO_FILE_SELECTED          = _UxGT("Aucun fichier selectionne");
+  LSTR DGUS_MSG_TEMP_TOO_LOW              = _UxGT("Temperature trop basse");
   LSTR DGUS_MSG_EXECUTING_COMMAND         = _UxGT("Execution de la commande...");
   LSTR DGUS_MSG_BED_PID_DISABLED          = _UxGT("Bed PID desactive");
   LSTR DGUS_MSG_PID_DISABLED              = _UxGT("PID desactive");

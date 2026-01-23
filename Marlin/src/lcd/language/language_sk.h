@@ -54,14 +54,15 @@ namespace LanguageNarrow_sk {
   LSTR MSG_LOW                            = _UxGT("NÍZKA");
   LSTR MSG_BACK                           = _UxGT("Naspäť");
   LSTR MSG_ERROR                          = _UxGT("Chyba");
+
   LSTR MSG_MEDIA_ABORTING                 = _UxGT("Ruším...");
   LSTR MSG_MEDIA_INSERTED                 = _UxGT("Karta vložená");
   LSTR MSG_MEDIA_REMOVED                  = _UxGT("Karta vybraná");
-  LSTR MSG_MEDIA_WAITING                  = _UxGT("Čakám na kartu");
   LSTR MSG_MEDIA_INIT_FAIL                = _UxGT("Inicial.karty zlyhala");
   LSTR MSG_MEDIA_READ_ERROR               = _UxGT("Chyba čítania karty");
-  LSTR MSG_MEDIA_USB_REMOVED              = _UxGT("USB zaria. odstrán.");
-  LSTR MSG_MEDIA_USB_FAILED               = _UxGT("Chyba spúšťania USB");
+  LSTR MSG_USB_FD_DEVICE_REMOVED          = _UxGT("USB zaria. odstrán.");
+  LSTR MSG_USB_FD_USB_FAILED              = _UxGT("Chyba spúšťania USB");
+
   LSTR MSG_KILL_SUBCALL_OVERFLOW          = _UxGT("Preteč. podprogramu");
   LSTR MSG_LCD_ENDSTOPS                   = _UxGT("Endstopy"); // max 8 znakov
   LSTR MSG_LCD_SOFT_ENDSTOPS              = _UxGT("Soft. endstopy");
@@ -343,8 +344,6 @@ namespace LanguageNarrow_sk {
   LSTR MSG_PID_CYCLE                      = _UxGT("Cykly PID");
   LSTR MSG_PID_AUTOTUNE_DONE              = _UxGT("Kal. PID dokončená");
   LSTR MSG_PID_AUTOTUNE_FAILED            = _UxGT("Kal. PID zlyhala!");
-  LSTR MSG_BAD_HEATER_ID                  = _UxGT("Zlý extrudér");
-  LSTR MSG_TEMP_TOO_HIGH                  = _UxGT("Príliš vysoká tepl.");
   LSTR MSG_PID_BAD_HEATER_ID              = _UxGT("Auto-kal. zlyhala! Zlý extrúder.");
   LSTR MSG_PID_TEMP_TOO_HIGH              = _UxGT("Auto-kal. zlyhala! Príliš vysoká tepl.");
   LSTR MSG_PID_TIMEOUT                    = _UxGT("Auto-kal. zlyhala! Čas vypršal.");
@@ -799,6 +798,9 @@ namespace LanguageNarrow_sk {
   LSTR MSG_USB_DISK                       = _UxGT("USB disk");
 
   LSTR MSG_HOST_SHUTDOWN                  = _UxGT("Vypnúť hosta");
+
+  // DGUS-Specific message strings, not used elsewhere
+  LSTR DGUS_MSG_TEMP_TOO_HIGH             = _UxGT("Príliš vysoká tepl.");
 }
 
 namespace LanguageWide_sk {

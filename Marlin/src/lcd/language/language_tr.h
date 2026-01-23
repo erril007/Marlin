@@ -52,17 +52,18 @@ namespace LanguageNarrow_tr {
   LSTR MSG_LOW                            = _UxGT("DÜŞÜK");
   LSTR MSG_BACK                           = _UxGT("Geri");
   LSTR MSG_ERROR                          = _UxGT("Hata");
+
   LSTR MSG_MEDIA_ABORTING                 = _UxGT("Durduruluyor...");
   LSTR MSG_MEDIA_INSERTED                 = _UxGT("SD K. Yerleştirildi.");
   LSTR MSG_MEDIA_REMOVED                  = _UxGT("SD Kart Çıkarıldı.");
-  LSTR MSG_MEDIA_WAITING                  = _UxGT("SD Kart Bekleniyor");
   LSTR MSG_MEDIA_INIT_FAIL                = _UxGT("SD K. Başlatma Hatası");
   LSTR MSG_MEDIA_READ_ERROR               = _UxGT("Kart Okuma Hatası");
-  LSTR MSG_MEDIA_USB_REMOVED              = _UxGT("USB Çıkarıldı");
-  LSTR MSG_MEDIA_USB_FAILED               = _UxGT("USB Başlat. Hatası");
+  LSTR MSG_USB_FD_DEVICE_REMOVED          = _UxGT("USB Çıkarıldı");
+  LSTR MSG_USB_FD_USB_FAILED              = _UxGT("USB Başlat. Hatası");
   LSTR MSG_MEDIA_SORT                     = _UxGT("Medyayı Sırala");
   LSTR MSG_MEDIA_UPDATE                   = _UxGT("Medyayı Güncelle");
   LSTR MSG_KILL_SUBCALL_OVERFLOW          = _UxGT("Subcall Overflow");
+
   LSTR MSG_LCD_ENDSTOPS                   = _UxGT("Endstops"); // Max length 8 characters
   LSTR MSG_LCD_SOFT_ENDSTOPS              = _UxGT("Soft Endstops");
   LSTR MSG_MAIN_MENU                      = _UxGT("Ana");
@@ -346,9 +347,6 @@ namespace LanguageNarrow_tr {
   LSTR MSG_PID_CYCLE                      = _UxGT("PID Döngüleri");
   LSTR MSG_PID_AUTOTUNE_DONE              = _UxGT("PID ayarı yapıldı");
   LSTR MSG_PID_AUTOTUNE_FAILED            = _UxGT("Kalibrasyon başarısız!");
-  LSTR MSG_BAD_HEATER_ID                  = _UxGT("Kötü ekstruder.");
-  LSTR MSG_TEMP_TOO_HIGH                  = _UxGT("Sıcaklık çok yüksek.");
-  LSTR MSG_TEMP_TOO_LOW                   = _UxGT("Sıcaklık çok düşük");
   LSTR MSG_PID_BAD_HEATER_ID              = _UxGT("Kalibrasyon başarısız! Kötü ekstruder.");
   LSTR MSG_PID_TEMP_TOO_HIGH              = _UxGT("Kalibrasyon başarısız! Sıcaklık çok yüksek.");
   LSTR MSG_PID_TIMEOUT                    = _UxGT("Kalibrasyon başarısız! Zaman aşımı.");
@@ -868,6 +866,8 @@ namespace LanguageNarrow_tr {
   LSTR DGUS_MSG_NOT_WHILE_PRINTING        = _UxGT("Yazdırma sırasında izin verilmez");
   LSTR DGUS_MSG_NOT_WHILE_IDLE            = _UxGT("Boştayken izin verilmez");
   LSTR DGUS_MSG_NO_FILE_SELECTED          = _UxGT("Seçili dosya yok");
+  LSTR DGUS_MSG_TEMP_TOO_LOW              = _UxGT("Sıcaklık çok düşük");
+  LSTR DGUS_MSG_TEMP_TOO_HIGH             = _UxGT("Sıcaklık çok yüksek.");
   LSTR DGUS_MSG_EXECUTING_COMMAND         = _UxGT("Komut yürütülüyor...");
   LSTR DGUS_MSG_BED_PID_DISABLED          = _UxGT("Tabla PID pasif");
   LSTR DGUS_MSG_PID_DISABLED              = _UxGT("PID devre dışı");
@@ -890,7 +890,6 @@ namespace LanguageNarrow_tr {
 namespace LanguageWide_tr {
   using namespace LanguageNarrow_tr;
   #if LCD_WIDTH >= 20 || HAS_DWIN_E3V2
-    LSTR MSG_LIVE_MOVE                    = _UxGT("Canlı Hareket");
     LSTR MSG_HOST_START_PRINT             = _UxGT("Host Baskıyı başlat");
     LSTR MSG_PRINTING_OBJECT              = _UxGT("Yazdırma Nesnesi");
     LSTR MSG_CANCEL_OBJECT                = _UxGT("Nesneyi İptal Et");

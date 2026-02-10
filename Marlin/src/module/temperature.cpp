@@ -1290,7 +1290,7 @@ void Temperature::factory_reset() {
     MPC_t &mpc = hotend.mpc;
 
     // Move to center of bed, just above bed height and cool with max fan
-    home_if_needed();
+    motion.home_if_needed();
     disable_all_heaters();
     #if HAS_FAN
       zero_fan_speeds();

@@ -783,7 +783,7 @@
                                                                                           // 0.00512 J/K/mm for 1.75mm PVA *FG
 
   // Advanced options
-  #define MPC_SMOOTHING_FACTOR 0.5f                   // (0.0...1.0) Noisy temperature sensors may need a lower value for stabilization.
+  #define MPC_SMOOTHING_FACTOR 0.4f                   // (0.0...1.0) Noisy temperature sensors may need a lower value for stabilization.
   #define MPC_MIN_AMBIENT_CHANGE 1.0f                 // (K/s) Modeled ambient temperature rate of change, when correcting model inaccuracies.
   #define MPC_STEADYSTATE 0.5f                        // (K/s) Temperature change rate for steady state logic to be enforced.
 

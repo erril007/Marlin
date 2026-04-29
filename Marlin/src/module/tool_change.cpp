@@ -33,8 +33,8 @@
 #include "../MarlinCore.h"
 #include "../gcode/gcode.h"
 
-#define DEBUG_TOOL_CHANGE
-#define DEBUG_TOOLCHANGE_FILAMENT_SWAP
+//#define DEBUG_TOOL_CHANGE
+//#define DEBUG_TOOLCHANGE_FILAMENT_SWAP
 
 #if HAS_MULTI_EXTRUDER
   toolchange_settings_t toolchange_settings;  // Initialized by settings.load

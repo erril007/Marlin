@@ -392,7 +392,7 @@
 // For the other hotends it is their distance from the extruder 0 hotend.
 #define HOTEND_OFFSET_X { 0.0, 0.35 } // (mm) relative X-offset for each nozzle
 #define HOTEND_OFFSET_Y { 0.0, 0.9 }  // (mm) relative Y-offset for each nozzle
-#define HOTEND_OFFSET_Z { 0.0, 0.9 }  // (mm) relative Z-offset for each nozzle
+#define HOTEND_OFFSET_Z { 0.0, 1.05 }  // (mm) relative Z-offset for each nozzle
 
 // @section multi-material
 
@@ -2304,7 +2304,7 @@
   #define GRID_MAX_POINTS_X 11      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  #define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
+  //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
 
   #define UBL_TILT_ON_MESH_POINTS         // Use nearest mesh points with G29 J for better Z reference
   #define UBL_TILT_ON_MESH_POINTS_3POINT  // Use nearest mesh points with G29 J0 (3-point)

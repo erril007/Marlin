@@ -1238,7 +1238,7 @@
   /**
    * Advanced configuration
    */
-  #define FTM_BUFFER_SIZE             1024   // Window size for trajectory generation, must be a power of 2 (e.g 64, 128, 256, ...)
+  #define FTM_BUFFER_SIZE            1024   // Window size for trajectory generation, must be a power of 2 (e.g 64, 128, 256, ...)
                                             // The total buffered time in seconds is (FTM_BUFFER_SIZE/FTM_FS)
   #define FTM_FS                     1000   // (Hz) Frequency for trajectory generation.
   #define FTM_MIN_SHAPE_FREQ           10   // (Hz) Minimum shaping frequency, lower consumes more RAM
@@ -1284,12 +1284,12 @@
 //#define INPUT_SHAPING_Z
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
   #if ENABLED(INPUT_SHAPING_X)
-    #define SHAPING_FREQ_X   30.0        // (Hz) The default dominant resonant frequency on the X axis.
-    #define SHAPING_ZETA_X   0.3       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
+    #define SHAPING_FREQ_X   37.0        // (Hz) The default dominant resonant frequency on the X axis.
+    #define SHAPING_ZETA_X   0.1       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Y)
-    #define SHAPING_FREQ_Y   30.0        // (Hz) The default dominant resonant frequency on the Y axis.
-    #define SHAPING_ZETA_Y   0.3       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
+    #define SHAPING_FREQ_Y   37.0        // (Hz) The default dominant resonant frequency on the Y axis.
+    #define SHAPING_ZETA_Y   0.1       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Z)
     #define SHAPING_FREQ_Z   0.0        // (Hz) The default dominant resonant frequency on the Z axis.

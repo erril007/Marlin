@@ -41,7 +41,7 @@ int32_t ResonanceGenerator::freq_to_phase_fp;
 int32_t ResonanceGenerator::max_freq_fp;
 int32_t ResonanceGenerator::phase_fp;
 int32_t ResonanceGenerator::current_freq_fp;
-int32_t ResonanceGenerator::amplitude_precalc_fp; 
+int32_t ResonanceGenerator::amplitude_precalc_fp;
 
 
 #if HAS_STANDARD_MOTION
@@ -53,7 +53,7 @@ ResonanceGenerator rtg;
 ResonanceGenerator::ResonanceGenerator() {}
 
 void ResonanceGenerator::start() {
-  gcode.home_all_axes(); // Always home axes first
+  motion.home_if_needed(); // Only Home axes if needed
   motion.blocking_move_xy(X_CENTER, Y_CENTER, Z_CLEARANCE_FOR_HOMING);
 
   rt_params.start_pos = motion.position;

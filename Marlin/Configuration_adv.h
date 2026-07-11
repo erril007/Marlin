@@ -1261,10 +1261,6 @@
                                             // POLY trajectories not only reduce resonances without rounding corners, but
                                             // also reduce extruder strain due to linear advance.
 
-  #define FTM_MINIMUM_CRUISE_RATIO 0.0f         // Minimum fraction of distance to spend at cruising speed (0.0f disables)
-                                                // Reduces vibrations and extrusion artefacts in short blocks like small surface
-                                                // features and thin solid infills
-
   /**
    * Advanced configuration
    */

@@ -97,8 +97,6 @@ void say_shaping() {
         #if HAS_DYNAMIC_FREQ
           if (dynamic) SERIAL_ECHO(F(" scaling: "), p_float_t(c.dynFreqK.x, 2), F("Hz/"), z_based ? F("mm") : F("g"));
         #endif
-        SERIAL_ECHO(F(" Zeta: "), p_float_t(c.zeta.x, 3));
-        SERIAL_ECHO(F(" Vtol: "), p_float_t(c.vtol.x, 3));
         SERIAL_EOL();
       }
     #endif
@@ -111,8 +109,6 @@ void say_shaping() {
         #if HAS_DYNAMIC_FREQ
           if (dynamic) SERIAL_ECHO(F(" scaling: "), p_float_t(c.dynFreqK.y, 2), F("Hz/"), z_based ? F("mm") : F("g"));
         #endif
-        SERIAL_ECHO(F(" Zeta: "), p_float_t(c.zeta.y, 3));
-        SERIAL_ECHO(F(" Vtol: "), p_float_t(c.vtol.y, 3));
         SERIAL_EOL();
       }
     #endif

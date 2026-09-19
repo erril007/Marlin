@@ -1936,7 +1936,7 @@
 #define Z_AFTER_HOMING         2   // (mm) Height to move to after homing (if Z was homed)
 //#define XY_AFTER_HOMING { X_CENTER, Y_CENTER }  // (mm) Move to an XY position after homing (and raising Z)
 
-//#define EVENT_GCODE_AFTER_HOMING "G90\nG60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nG4\nM280 P0 S0\nG4\nG0 Y300 F6000\nG61 S0"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
+//#define EVENT_GCODE_AFTER_HOMING "G90\nG60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nM400\nM280 P0 S0\nM400\nG0 Y300 F6000\nG61 S0"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
@@ -2201,13 +2201,13 @@
  * Commands to execute at the start of G29 probing,
  * after switching to the PROBING_TOOL.
  */
-#define EVENT_GCODE_BEFORE_G29 "T0\nG60 S0\nG0 X315 F10000\nG0 X315 Y300 F10000\nG0 X315 Y365 F5000\nG4\nM280 P0 S60\nG4\nG0 X315 Y300 F5000\nM851 Z0\nG28 Z"
+#define EVENT_GCODE_BEFORE_G29 "T0\nG60 S0\nG0 X315 F10000\nG0 X315 Y300 F10000\nG0 X315 Y365 F5000\nM400\nM280 P0 S60\nM400\nG0 X315 Y300 F5000\nM851 Z0\nG28 Z"
 
 /**
  * Commands to execute at the end of G29 probing.
  * Useful to retract or move the Z probe out of the way.
  */
-//#define EVENT_GCODE_AFTER_G29 "G60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nG4\nM280 P0 S0\nG4\nG0 Y300 F6000\nG61 S0"
+//#define EVENT_GCODE_AFTER_G29 "G60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nM400\nM280 P0 S0\nM400\nG0 Y300 F6000\nG61 S0"
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable one of

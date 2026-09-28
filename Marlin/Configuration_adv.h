@@ -1202,12 +1202,12 @@
   #define FTM_SHAPER_MZV
 
   #define FTM_DEFAULT_SHAPER_X      ftMotionShaper_MZV // Default shaper mode on X axis (NONE, ZV, ZVD, ZVDD, ZVDDD, EI, 2HEI, 3HEI, MZV)
-  #define FTM_SHAPING_DEFAULT_FREQ_X   41.0f    // (Hz) Default peak frequency used by input shapers
+  #define FTM_SHAPING_DEFAULT_FREQ_X   50.0f    // (Hz) Default peak frequency used by input shapers
   #define FTM_SHAPING_ZETA_X            0.1f    // Zeta used by input shapers for X axis
   #define FTM_SHAPING_V_TOL_X           0.05f   // Vibration tolerance used by EI input shapers for X axis
 
   #define FTM_DEFAULT_SHAPER_Y      ftMotionShaper_MZV // Default shaper mode on Y axis
-  #define FTM_SHAPING_DEFAULT_FREQ_Y   41.0f    // (Hz) Default peak frequency used by input shapers
+  #define FTM_SHAPING_DEFAULT_FREQ_Y   50.0f    // (Hz) Default peak frequency used by input shapers
   #define FTM_SHAPING_ZETA_Y            0.1f    // Zeta used by input shapers for Y axis
   #define FTM_SHAPING_V_TOL_Y           0.05f   // Vibration tolerance used by EI input shapers for Y axis
 
@@ -1267,7 +1267,7 @@
   #define FTM_BUFFER_SIZE            1024   // Window size for trajectory generation, must be a power of 2 (e.g 64, 128, 256, ...)
                                             // The total buffered time in seconds is (FTM_BUFFER_SIZE/FTM_FS)
   #define FTM_FS                     1000   // (Hz) Frequency for trajectory generation.
-  #define FTM_MIN_SHAPE_FREQ           10   // (Hz) Minimum shaping frequency, lower consumes more RAM
+  #define FTM_MIN_SHAPE_FREQ           5   // (Hz) Minimum shaping frequency, lower consumes more RAM
 
   /**
    * TMC2208 / TMC2208_STANDALONE drivers require a brief pause after a DIR change
@@ -4882,7 +4882,7 @@
 //
 // M43 - display pin status, toggle pins, watch pins, watch endstops & toggle LED, test servo probe
 //
-//#define PINS_DEBUGGING
+#define PINS_DEBUGGING
 
 //
 // M265 - I2C Scanner

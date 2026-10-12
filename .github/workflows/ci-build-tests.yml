@@ -105,6 +105,7 @@ jobs:
         # STM32F1
         - chitu_f103
         - mks_robin
+        - mks_robin_e3
         - mks_robin_nano_v1v2
         - PANDA_PI_V29
         - STM32F103RC_btt
@@ -146,6 +147,7 @@ jobs:
         - BTT_SKR_SE_BX
         - STM32H743VI_btt
         - STM32H723VG_btt
+        - STM32H723VG_fysetc
 
         # STM32F1 (Maple)
         - jgaurora_a5s_a1_maple

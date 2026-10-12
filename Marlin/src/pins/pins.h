@@ -805,7 +805,7 @@
 #elif MB(BLACKPILL_CUSTOM)
   #include "stm32f4/pins_BLACKPILL_CUSTOM.h"        // STM32F4                              env:STM32F401CD_blackpill_stlink
 #elif MB(I3DBEEZ9_V1)
-  #include "stm32f4/pins_I3DBEEZ9.h"                // STM32F4                              env:I3DBEEZ9_V1
+  #include "stm32f4/pins_I3DBEEZ9.h"                // STM32F4                              env:I3DBEEZ9_V1 env:I3DBEEZ9_V1_usb_flash_drive
 #elif MB(MELLOW_FLY_E3_V2)
   #include "stm32f4/pins_MELLOW_FLY_E3_V2.h"        // STM32F4                              env:STM32F407VG_mellow_fly_e3
 #elif MB(MELLOW_FLY_E3_PRO_V3)
@@ -884,6 +884,8 @@
   #include "stm32h7/pins_FYSETC_SPIDER_KING_V1_1_H723.h" // STM32H7                         env:STM32H723ZG_fysetc
 #elif MB(BTT_SCYLLA_V1_0)
   #include "stm32h7/pins_BTT_SCYLLA_V1_0.h"              // STM32H7                         env:STM32H723VG_btt
+#elif MB(FYSETC_SPIDER_V3_H723)
+  #include "stm32h7/pins_FYSETC_SPIDER_V3_H723.h"        // STM32H7                         env:STM32H723VG_fysetc
 
 //
 // Espressif ESP32

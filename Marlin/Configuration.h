@@ -367,7 +367,7 @@
 
 #if ANY(SWITCHING_TOOLHEAD, MAGNETIC_SWITCHING_TOOLHEAD, ELECTROMAGNETIC_SWITCHING_TOOLHEAD)
   #define SWITCHING_TOOLHEAD_Y_POS          365         // (mm) Y position of the toolhead dock. The docks are at the low-Y end if this is in the lower half of the Y travel, else at the high-Y end.
-  #define SWITCHING_TOOLHEAD_Y_SECURITY       0         // (mm) Security distance Y axis, from the dock toward the work area
+  #define SWITCHING_TOOLHEAD_Y_SECURITY      10         // (mm) Security distance Y axis, from the dock toward the work area
   #define SWITCHING_TOOLHEAD_Y_CLEAR         65         // (mm) Minimum distance from dock (toward the work area) for unobstructed X axis
   #define SWITCHING_TOOLHEAD_X_POS          { 315, 240 }  // (mm) X positions for parking the extruders  { 15, 90, 165, 240, 315 }
   #if ENABLED(SWITCHING_TOOLHEAD)
@@ -413,7 +413,7 @@
 // For the other hotends it is their distance from the extruder 0 hotend.
 #define HOTEND_OFFSET_X { 0.0, 0.0 } // (mm) relative X-offset for each nozzle
 #define HOTEND_OFFSET_Y { 0.0, 0.0 }  // (mm) relative Y-offset for each nozzle
-#define HOTEND_OFFSET_Z { 0.0, 0.0 }  // (mm) relative Z-offset for each nozzle
+#define HOTEND_OFFSET_Z { 0.0, 1.25 }  // (mm) relative Z-offset for each nozzle
 
 // @section multi-material
 
@@ -1748,7 +1748,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 13.95 }   //FG offset for carrier probe // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
+#define NOZZLE_TO_PROBE_OFFSET { 0, -32.50, 14.6 }   //FG offset for carrier probe // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
 //#define NOZZLE_TO_PROBE_OFFSET { 0, 0, 15 }   //FG offset probe tool // (mm) X, Y, Z distance from Nozzle tip to Probe trigger-point
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
@@ -1958,7 +1958,7 @@
 #define Z_AFTER_HOMING         2   // (mm) Height to move to after homing (if Z was homed)
 //#define XY_AFTER_HOMING { X_CENTER, Y_CENTER }  // (mm) Move to an XY position after homing (and raising Z)
 
-//#define EVENT_GCODE_AFTER_HOMING "G90\nG60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nG4\nM280 P0 S0\nG4\nG0 Y300 F6000\nG61 S0"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
+//#define EVENT_GCODE_AFTER_HOMING "G90\nG60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nM400\nM280 P0 S0\nM400\nG0 Y300 F6000\nG61 S0"  // Commands to run after G28 (and move to XY_AFTER_HOMING)
 
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
@@ -2223,13 +2223,13 @@
  * Commands to execute at the start of G29 probing,
  * after switching to the PROBING_TOOL.
  */
-#define EVENT_GCODE_BEFORE_G29 "T0\nG60 S0\nG0 X315 F10000\nG0 X315 Y300 F10000\nG0 X315 Y365 F5000\nG4\nM280 P0 S60\nG4\nG0 X315 Y300 F5000\nM851 Z0\nG28 Z"
+#define EVENT_GCODE_BEFORE_G29 "T0\nG60 S0\nG0 X315 F10000\nG0 X315 Y300 F10000\nG0 X315 Y365 F5000\nM400\nM280 P0 S60\nM400\nG0 X315 Y300 F5000\nM851 Z0\nG28 Z"
 
 /**
  * Commands to execute at the end of G29 probing.
  * Useful to retract or move the Z probe out of the way.
  */
-//#define EVENT_GCODE_AFTER_G29 "G60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nG4\nM280 P0 S0\nG4\nG0 Y300 F6000\nG61 S0"
+//#define EVENT_GCODE_AFTER_G29 "G60 S0\nG0 X315 Y300 F6000\nG0 X315 Y365 F6000\nM400\nM280 P0 S0\nM400\nG0 Y300 F6000\nG61 S0"
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable one of
@@ -2339,10 +2339,10 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 0              // (mm) Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 11      // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_X 9      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
-  //#define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
+  #define UBL_HILBERT_CURVE       // Use Hilbert distribution for less travel when probing multiple points
 
   #define UBL_TILT_ON_MESH_POINTS         // Use nearest mesh points with G29 J for better Z reference
   #define UBL_TILT_ON_MESH_POINTS_3POINT  // Use nearest mesh points with G29 J0 (3-point)
@@ -2479,7 +2479,7 @@
 //#define PRECISE_Z_HOMING
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (40*60), (40*60), (4*60) }
+#define HOMING_FEEDRATE_MM_M { (33*60), (33*60), (4*60) }
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 #define EDITABLE_HOMING_FEEDRATE

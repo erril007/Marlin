@@ -511,7 +511,7 @@
 
 // Show Temperature ADC value
 // Enable for M105 to include ADC values read from temperature sensors.
-//#define SHOW_TEMP_ADC_VALUES
+#define SHOW_TEMP_ADC_VALUES
 
 /**
  * High Temperature Thermistor Support
@@ -1105,7 +1105,7 @@
   // On a 300mm bed a 5% grade would give a misalignment of ~1.5cm
   #define G34_MAX_GRADE              5     // (%) Maximum incline that G34 will handle
   #define Z_STEPPER_ALIGN_ITERATIONS 10    // Number of iterations to apply during alignment
-  #define Z_STEPPER_ALIGN_ACC        0.005 // Stop iterating early if the accuracy is better than this
+  #define Z_STEPPER_ALIGN_ACC        0.003 // Stop iterating early if the accuracy is better than this
 
   #define RESTORE_LEVELING_AFTER_G34       // Restore leveling after G34 is done?
 
@@ -1117,7 +1117,7 @@
    * Commands to execute at the start of G34 probing,
    * after switching to the PROBING_TOOL.
    */
-  #define EVENT_GCODE_BEFORE_G34 "T0\nG60 S0\nG0 X315 F10000\nG0 X315 Y300 F10000\nG0 X315 Y365 F5000\nG4\nM280 P0 S60\nG4\nG0 X315 Y300 F5000\nM851 Z0\nG28 Z"
+  #define EVENT_GCODE_BEFORE_G34 "T0\nG60 S0\nG0 X315 F10000\nG0 X315 Y300 F10000\nG0 X315 Y365 F5000\nM400\nM280 P0 S60\nM400\nG0 X315 Y300 F5000\nM851 Z0\nG28 Z"
 
   /**
    * Commands to execute at the end of G34 probing.
@@ -1197,12 +1197,12 @@
   #define FTM_SHAPER_MZV
 
   #define FTM_DEFAULT_SHAPER_X      ftMotionShaper_MZV // Default shaper mode on X axis (NONE, ZV, ZVD, ZVDD, ZVDDD, EI, 2HEI, 3HEI, MZV)
-  #define FTM_SHAPING_DEFAULT_FREQ_X   41.0f    // (Hz) Default peak frequency used by input shapers
+  #define FTM_SHAPING_DEFAULT_FREQ_X   34.5f    // (Hz) Default peak frequency used by input shapers
   #define FTM_SHAPING_ZETA_X            0.1f    // Zeta used by input shapers for X axis
   #define FTM_SHAPING_V_TOL_X           0.05f   // Vibration tolerance used by EI input shapers for X axis
 
   #define FTM_DEFAULT_SHAPER_Y      ftMotionShaper_MZV // Default shaper mode on Y axis
-  #define FTM_SHAPING_DEFAULT_FREQ_Y   41.0f    // (Hz) Default peak frequency used by input shapers
+  #define FTM_SHAPING_DEFAULT_FREQ_Y   34.5f    // (Hz) Default peak frequency used by input shapers
   #define FTM_SHAPING_ZETA_Y            0.1f    // Zeta used by input shapers for Y axis
   #define FTM_SHAPING_V_TOL_Y           0.05f   // Vibration tolerance used by EI input shapers for Y axis
 
@@ -2993,7 +2993,7 @@
   // Z raise distance for tool-change, as needed for some extruders
   #define TOOLCHANGE_ZRAISE                 2 // (mm)
   //#define TOOLCHANGE_ZRAISE_BEFORE_RETRACT  // Apply raise before swap retraction (if enabled)
-  #define TOOLCHANGE_NO_RETURN              // Never return to previous position on tool-change
+  //#define TOOLCHANGE_NO_RETURN              // Never return to previous position on tool-change
   #if ENABLED(TOOLCHANGE_NO_RETURN)
     //#define EVENT_GCODE_AFTER_TOOLCHANGE "G12X"   // Extra G-code to run after tool-change
   #endif
@@ -3688,9 +3688,9 @@
 
   #if ANY(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209, TMC2240: 0...255. Others: -64...63
-    #define X_STALL_SENSITIVITY  73
+    #define X_STALL_SENSITIVITY  76
     //#define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-    #define Y_STALL_SENSITIVITY  73
+    #define Y_STALL_SENSITIVITY  76
     //#define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
     //#define Z_STALL_SENSITIVITY  255
     //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
@@ -5028,7 +5028,7 @@
 //
 // M43 - display pin status, toggle pins, watch pins, watch endstops & toggle LED, test servo probe
 //
-#define PINS_DEBUGGING
+//#define PINS_DEBUGGING
 
 //
 // M265 - I2C Scanner

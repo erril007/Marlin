@@ -367,7 +367,7 @@
 
 #if ANY(SWITCHING_TOOLHEAD, MAGNETIC_SWITCHING_TOOLHEAD, ELECTROMAGNETIC_SWITCHING_TOOLHEAD)
   #define SWITCHING_TOOLHEAD_Y_POS          365         // (mm) Y position of the toolhead dock. The docks are at the low-Y end if this is in the lower half of the Y travel, else at the high-Y end.
-  #define SWITCHING_TOOLHEAD_Y_SECURITY      10         // (mm) Security distance Y axis, from the dock toward the work area
+  #define SWITCHING_TOOLHEAD_Y_SECURITY      20         // (mm) Security distance Y axis, from the dock toward the work area
   #define SWITCHING_TOOLHEAD_Y_CLEAR         65         // (mm) Minimum distance from dock (toward the work area) for unobstructed X axis
   #define SWITCHING_TOOLHEAD_X_POS          { 315, 240 }  // (mm) X positions for parking the extruders  { 15, 90, 165, 240, 315 }
   #if ENABLED(SWITCHING_TOOLHEAD)
@@ -1419,9 +1419,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          2000    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  2000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   2000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          2500    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  2500    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   2500    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -2225,7 +2225,7 @@
  * Commands to execute at the start of G29 probing,
  * after switching to the PROBING_TOOL.
  */
-#define EVENT_GCODE_BEFORE_G29 "T0\nG60 S0\nG0 X315 F10000\nG0 X315 Y300 F10000\nG0 X315 Y365 F5000\nM400\nM280 P0 S60\nM400\nG0 X315 Y300 F5000\nM851 Z0\nG28 Z"
+#define EVENT_GCODE_BEFORE_G29 "T0\nG60 S0\nG0 X315 Y300 F15000\nG0 X315 Y345 F15000\nM400\nM280 P0 S60\nM400\nG0 X315 Y365 F3000\nM400\nG0 X315 Y345 F3000\nG0 X315 Y300 F15000\nM851 Z0\nG28 Z"
 
 /**
  * Commands to execute at the end of G29 probing.

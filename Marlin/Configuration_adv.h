@@ -2505,7 +2505,7 @@
   #else
     #define ADVANCE_K 0        // (mm) Compression length for all extruders. Override with 'M900 K<mm>'.
   #endif
-  //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with 'M900 L'.
+  #define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with 'M900 L'.
 #endif
 
 #if ENABLED(LIN_ADVANCE)

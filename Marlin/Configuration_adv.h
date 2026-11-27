@@ -3207,7 +3207,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT      1200        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT      1100        // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  600        // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.11
@@ -3227,7 +3227,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT      1200
+    #define Y_CURRENT      1100
     #define Y_CURRENT_HOME  600
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
@@ -3247,7 +3247,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT      1200
+    #define Z_CURRENT      1100
     #define Z_CURRENT_HOME  600
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
